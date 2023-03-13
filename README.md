@@ -1,6 +1,6 @@
 # RattanID
 
-Identification of rattan palms using genome-scale data
+Identification of rattan palms and rattan furniture using genome-scale data
 - Skmer pipeline: Identification using genome skims
 - VSEARCH pipeline: Identification using A353 and PhyloPalm target capture data
 
