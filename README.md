@@ -1,4 +1,4 @@
-# PalmID
+# RattanID
 
 Identification of rattan palms using genome-scale data
 - Skmer pipeline: Identification using genome skims
