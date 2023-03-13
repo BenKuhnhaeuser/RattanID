@@ -1,0 +1,10 @@
+# Namelists
+#-----------
+# Sequence names
+```name=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' /home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/namelist_ikea.txt)```
+
+# Sample names
+name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' /home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/namelist_ikea_samplenames.txt)
+
+# Sample names, but in lower case (needed for Skmer output)
+name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
