@@ -1,10 +1,171 @@
+#----------------------
+#----------------------
+# Skmer query pipeline
+#----------------------
+#----------------------
+
+
+#--------------------------------
+# Software needed
+#--------------------------------
+
+# Trimmomatic 0.39
+# bbmap
+# Kraken
+# Skmer
+# seqtk
+
+
+#--------------------------------
+# Data needed
+#--------------------------------
+
+# Raw data
+
+# Sequence name list, one per line
+
+# Sample name list
+## In exactly same order as sequence names
+## No whitespace (" "), no special characters such as "/", "?", "*", ","
+## Underscores ("_") are ok
+## Each name must be unique
+
+# Sequencing adapters file
+
+# Kraken database for decontamination
+
+# Skmer genomic reference database
+
+
+#--------------------------------
+# Directory structure
+#--------------------------------
+
+# data/
+  |- raw/
+     |- skim/
+  |- names/
+     |- namelist_sequences.txt
+     |- namelist_samples.txt
+
+# adapters/
+  |- TruSeq3-PE-2.fa
+
+# reference/
+  |- kraken_database/
+     |- db_calamoideae/
+  |- skmer_database/
+     |- skmer_library/
+
+# analyses/
+  |- skmer/
+     |- logs/
+
+
+#--------------------------------------
+# Slurm script "skmer_raw_to_query.sh"
+#--------------------------------------
+
+#!/bin/bash
+#
+#SBATCH -D ~/analyses/skmer/
+#SBATCH -p short
+#SBATCH -J skmer_pipeline
+#SBATCH -c 4
+#SBATCH --mem=4GB
+#SBATCH -o logs/skmer_pipeline_%A_%a.out
+#SBATCH -e logs/skmer_pipeline_%A_%a.err
+
+
 # Namelists
 #-----------
 # Sequence names
-```name=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' /home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/namelist_ikea.txt)```
+name=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' ../../data/names/namelist_sequences.txt)
 
 # Sample names
-name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' /home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/namelist_ikea_samplenames.txt)
+name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' ../../data/names/namelist_samples.txt)
 
 # Sample names, but in lower case (needed for Skmer output)
 name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
+
+
+# Activate conda
+#----------------
+source activate
+conda activate
+
+
+# Trim
+#------
+# Adapter and quality trimming
+trimmomatic PE -threads 4 -phred33 -basein ../../data/raw/skim"$name"_S1_L005_R1_001.fastq.gz -baseout "$name".fastq.gz ILLUMINACLIP:../../adapters/TruSeq3-PE-2.fa:2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36
+
+
+# Decontaminate
+#---------------
+kraken2 --db ../../reference/kraken_database/db_calamoideae --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name"#P_decontaminated.fastq "$name"_1P.fastq.gz "$name"_2P.fastq.gz
+
+
+# Merge
+#-------
+bbmerge.sh in1="$name"_1P_decontaminated.fastq in2="$name"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t
+
+# Normalise
+#-----------
+# Normalise query by downsampling to 500,000 reads (same as reference)
+seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq
+
+
+# Query
+#-------
+# Calculate genetic distances
+skmer query "$name_sample".fastq ../../reference/skmer_database/skmer_library/ -p 4 -o dist
+
+
+# Rename
+#--------
+mv dist-"$name_lower".txt "$name_sample"_distances.txt
+
+
+# Summarise
+#-----------
+
+# Query sample name, cleaned merged reads of query, closest reference (identification), minimum genomic distance to closest reference
+echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_sample"_summary.txt
+(echo "$name_sample" "$name"; (echo $(cat $name_sample.fastq | wc -l)/4|bc); (sed -n '2 p' "$name_sample"_distances.txt)) | tr "\n" " " >> "$name_sample"_summary.txt
+
+# Data check
+## PASS if reads >= 500,000 and min genomic distance <= 0.05
+## WARN if reads between 100,000 and 500,000 and min genomic distance <= 0.05
+## FAIL otherwise
+awk 'NR==1{print $0, "data_check"; next}; {data_check="FAIL"}; 100000<=$3 && 500000>$3 && 0.05>=$5 {data_check="WARN"}; 500000<=$3 && 0.05>=$5 {data_check="PASS"}; {print $0, data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt
+
+# Overwrite summary file to include new info
+mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
+
+
+# Clean up
+#----------
+# Remove trimmed reads
+rm "$name"_{1,2}{U,P}.fastq.gz
+
+# Remove decontaminated reads
+rm "$name"_{1,2}P_decontaminated.fastq
+
+# Remove merged reads
+rm "$name_sample"_merged.fastq
+
+# Remove normalised reads
+rm "$name_sample".fastq
+
+# Remove kraken report
+rm "$name_sample"_kraken.txt
+
+
+
+#--------------------------------
+# Combine results
+#--------------------------------
+
+# Combine summary files
+cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt
