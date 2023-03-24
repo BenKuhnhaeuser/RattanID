@@ -43,13 +43,13 @@
  Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
 # Sequencing adapters file
-adapters=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/scripts/slurm/trimmomatic/adapters/TruSeq3-PE-2.fa
+adapters=./adapters/TruSeq3-PE-2.fa
 
 # Kraken database directory for decontamination
-kraken_db=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/kraken/databases/db_calamoideae/
+kraken_db_calamoideae=./db_calamoideae/
 
 # Skmer genomic reference database directory for identification
-skmer_db=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/skmer/normalised_reads/5e5/skim/reference/library_renamed/
+skmer_db=./skmer_reference_db_normalised_5e5reads/
 
 
 # Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
@@ -57,11 +57,12 @@ skmer_db=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identificatio
 # Raw data directory
 ## Paired read data
 ## Assumed to be ending with "_S1_L005_R1_001.fastq.gz" or "_S2_L005_R1_001.fastq.gz", otherwise please change
-data_directory=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/data/skim/
+data_directory=./data/
 
 # Sequence name list
 ## One name per line
-names_sequences=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/data/skim/namelist_ikea.txt
+## Sequence name excluding common file ending. E.g., file "Sample_1_S1_L005_R1_001.fastq.gz" would have sequence name "Sample_1"
+names_sequences=./namelist_sequences.txt
 
 # Sample name list
 ## One name per line
@@ -69,7 +70,7 @@ names_sequences=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identi
 ## No whitespace (" "), no special characters such as "/", "?", "*", ","
 ## Underscores ("_") are ok
 ## Each name must be unique
-names_samples=/home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/data/skim/namelist_ikea_samplenames.txt
+names_samples=./namelist_samples.txt
 
 
 # Enable software
