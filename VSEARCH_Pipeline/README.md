@@ -1,5 +1,5 @@
 
-# General instructions
+# VSEARCH Pipeline
 
 ## 0) Overview
 This VSEARCH Pipeline takes all the samples to identify and for each sample:
