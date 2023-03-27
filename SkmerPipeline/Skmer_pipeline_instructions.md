@@ -26,7 +26,7 @@ Installation using anaconda is recommended. Script is verified to work with the 
 
 
 ## 3) Run the identification pipeline for each sample
-The pipeline script is called "skmer_raw_to_query.sh". It needs to be run for each sample. Needed preparations and changes to the script:
+You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanations of the script are below. The script needs to be run for each sample. Needed preparations and changes to the script:
 - Create a directory called `logs` to which log files are written (otherwise the Slurm script will fail)
 - Specify file and directory locations in beginning of script
 - If you want to keep intermediate files, out-comment delete commands in end of script
