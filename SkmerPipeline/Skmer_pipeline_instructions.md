@@ -9,22 +9,30 @@ The slurm script takes all the samples to identify and for each sample:
 - checks if there was enough data and if the genetic distance is small enough for the results to be reliable
 
 
-## 1) Install software (installation using anaconda is recommended)
+## 1) Reference data
+Download these from Zenodo: https://doi.org/10.5281/zenodo.7733000
+- Sequencing adapters file
+- Kraken database for decontamination
+- Skmer genomic reference database for identification
+
+
+## 2) Required software
+Installation using anaconda is recommended. Script is verified to work with the indicated software versions.
 - Trimmomatic 0.39
 - bbmap 38.96
 - Kraken 2.1.2
 - Skmer 3.2.1
-- seqtk 1.3-r106
+- seqtk 1.3-r106  
 
 
-## 2) Run the script for each sample
+## 3) Run the identification pipeline for each sample
+The pipeline script is called "skmer_raw_to_query.sh". Needed preparations and changes to the script:
 - Create a directory called `logs` to which log files are written (otherwise the Slurm script will fail)
-- Specify file locations in beginning of script
-- If wanted to keep intermediate files, out-comment delete commands in end of script
+- Specify file and directory locations in beginning of script
+- If you want to keep intermediate files, out-comment delete commands in end of script
 
 
-## 3) Upon completion of individual runs, combine files using the following line of code
-`cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
+
 
 
 
@@ -43,7 +51,7 @@ The slurm script takes all the samples to identify and for each sample:
 #SBATCH -e logs/skmer_pipeline_%A_%a.err
 ```
 
- Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
+# Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
 # Sequencing adapters file
 adapters=./adapters/TruSeq3-PE-2.fa
@@ -161,3 +169,6 @@ rm "$name_sample".fastq
 # Remove kraken report
 rm "$name_sample"_kraken.txt
 
+
+## 4) Upon completion of individual runs, combine files using the following line of code
+`cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
