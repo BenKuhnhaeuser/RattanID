@@ -93,7 +93,7 @@ echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_
 (echo "$name_sample" "$name_sequence"; (echo $(cat $name_sample.fastq | wc -l)/4|bc); (sed -n '2 p' "$name_sample"_distances.txt)) | tr "\n" " " >> "$name_sample"_summary.txt
 
 # Data check
-awk 'NR==1{print $0, "data_check"; next}; {data_check="FAIL"}; 100000<=$3 && 500000>$3 && 0.05>=$5 {data_check="WARN"}; 500000<=$3 && 0.05>=$5 {data_check="PASS"}; {print $0, data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt
+awk 'NR==1{print $0, "Data_check"; next}; {Data_check="FAIL"}; 100000<=$3 && 500000>$3 && 0.05>=$5 {Data_check="WARN"}; 500000<=$3 && 0.05>=$5 {Data_check="PASS"}; {print $0, Data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt
 
 # Overwrite summary file to include new info
 mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
