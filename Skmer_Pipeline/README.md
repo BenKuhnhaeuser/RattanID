@@ -1,4 +1,4 @@
-# General instructions for Skmer Pipeline
+# Skmer Pipeline
 
 ## 0) Overview
 This Skmer Pipeline takes all the samples to identify and for each sample:
