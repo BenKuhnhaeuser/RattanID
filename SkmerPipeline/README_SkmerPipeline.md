@@ -73,6 +73,12 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 `names_sequences=./namelist_sequences.txt`
 - One name per line
 - Sequence name excluding common file ending. E.g., file "Sample_1_S1_L005_R1_001.fastq.gz" would have sequence name "Sample_1"
+###### Example sequence name list
+```
+BKL006
+BKL054
+BKL182
+```
 
 ##### Sample name list
 `names_samples=./namelist_samples.txt`
@@ -81,7 +87,12 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 - No whitespace (" "), no special characters such as "/", "?", "*", ","
 - Underscores ("_") are ok
 - Each name must be unique
-
+###### Example sample name list
+```
+Calamus_sp_1_Baker_561_BKL006
+Calamus_sp_2_Henderson_3289_BKL054
+Calamus_sp_3_Kuhnhaeuser_71_BKL182
+```
 
 ### 3.2) Enable software
 ```
