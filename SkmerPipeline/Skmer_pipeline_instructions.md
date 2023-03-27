@@ -89,7 +89,7 @@ source activate
 conda activate
 ```
 
-### 3.3) Get names for samples
+### 3.3) Get sequence and sample name for query
 #### Sequence names
 `name_sequence=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_sequences)`
 
