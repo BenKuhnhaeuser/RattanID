@@ -2,7 +2,7 @@
 # General instructions
 
 ## 0) Overview
-The slurm script takes all the samples to identify and for each sample:
+This Skmer Pipeline takes all the samples to identify and for each sample:
 - removes low quality and non-Calamoid sequences
 - calculates its genetic distance with all species in the reference database (based on sequence composition; give skmer ref)
 - provides the genetically closest reference species to the sample
