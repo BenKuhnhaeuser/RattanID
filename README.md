@@ -4,8 +4,8 @@ A project in collaboration between the Royal Botanic Gardens Kew and IKEA. More 
 
 
 Identification of rattan palms and rattan furniture using genome-scale data
-- [Skmer pipeline](SkmerPipeline): Identification using genome skims
-- VSEARCH pipeline: Identification using A353 and PhyloPalm target capture data
+- [Skmer pipeline](Skmer_Pipeline): Identification using genome skims
+- [VSEARCH pipeline](VSEARCH_Pipeline): Identification using A353 and PhyloPalm target capture data
 
 
 Reference data needed to run these analyses can be found here: https://doi.org/10.5281/zenodo.7733000
