@@ -1,34 +1,37 @@
-########################################################
-### 24 March 2023                                    ###
-### Benedikt Kuhnhäuser                              ###
-### Skmer query pipeline                             ###
-########################################################
 
-
-#--------------------------------
 # General instructions
-#--------------------------------
 
-# 1) Install software (installation using anaconda is recommended)
-## Trimmomatic 0.39
-## bbmap 38.96
-## Kraken 2.1.2
-## Skmer 3.2.1
-## seqtk 1.3-r106
-
-# 2) Run the script for each sample
-## Create a directory called "logs" to which log files are written (otherwise the Slurm script will fail)
-## Specify file locations in beginning of script
-## If wanted to keep intermediate files, out-comment delete commands in end of script
-
-# 3) Upon completion of individual runs, combine files using the following line of code
-## cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt
+## 0) Overview
+The slurm script takes all the samples to identify and for each sample:
+- removes low quality and non-Calamoid sequences
+- calculates its genetic distance with all species in the reference database (based on sequence composition; give skmer ref)
+- provides the genetically closest reference species to the sample
+- checks if there was enough data and if the genetic distance is small enough for the results to be reliable
 
 
-#--------------------------------------
+## 1) Install software (installation using anaconda is recommended)
+- Trimmomatic 0.39
+- bbmap 38.96
+- Kraken 2.1.2
+- Skmer 3.2.1
+- seqtk 1.3-r106
+
+
+## 2) Run the script for each sample
+- Create a directory called `logs` to which log files are written (otherwise the Slurm script will fail)
+- Specify file locations in beginning of script
+- If wanted to keep intermediate files, out-comment delete commands in end of script
+
+
+## 3) Upon completion of individual runs, combine files using the following line of code
+`cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
+
+
+
+
 # Slurm script "skmer_raw_to_query.sh" (RUN FOR EACH SAMPLE)
-#--------------------------------------
 
+```
 #!/bin/bash
 #
 #SBATCH -D ~/analyses/
@@ -38,7 +41,7 @@
 #SBATCH --mem=4GB
 #SBATCH -o logs/skmer_pipeline_%A_%a.out
 #SBATCH -e logs/skmer_pipeline_%A_%a.err
-
+```
 
  Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
