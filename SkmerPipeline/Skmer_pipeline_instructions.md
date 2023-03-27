@@ -140,7 +140,6 @@ echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_
 
 
 ### 3.11) Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
-#----------
 `rm "$name_sequence"_{1,2}{U,P}.fastq.gz` 
 - Remove trimmed reads
 
