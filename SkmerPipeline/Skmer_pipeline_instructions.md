@@ -29,6 +29,7 @@ Installation using anaconda is recommended. Script is verified to work with the 
 You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanations of the script are below. The script needs to be run for each sample. Needed preparations and changes to the script:
 - Create a directory called `logs` to which log files are written (otherwise the Slurm script will fail)
 - Specify file and directory locations in beginning of script
+- Change file endings of raw reads at trimming step
 - If you want to keep intermediate files, out-comment delete commands in end of script
 
 ### Script header
@@ -52,28 +53,28 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 - `-o` and `-e` Logged outputs and error messages
 
 
-### 3.1) Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS HERE)
-#### Sequencing adapters file
+### 3.1) Specify data
+#### 3.1.1) Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS HERE)
+##### Sequencing adapters file
 `adapters=./adapters/TruSeq3-PE-2.fa`
 
-#### Kraken database directory for decontamination
+##### Kraken database directory for decontamination
 `kraken_db_calamoideae=./db_calamoideae/`
 
-#### Skmer genomic reference database directory for identification
+##### Skmer genomic reference database directory for identification
 `skmer_db=./skmer_reference_db_normalised_5e5reads/`
 
 
-### 3.2) Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
-#### Raw data directory with paired read data
+#### 3.1.2) Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
+##### Raw data directory with paired read data
 `data_directory=./data/`
 
-### Sequence name list
+##### Sequence name list
 `names_sequences=./namelist_sequences.txt`
 - One name per line
 - Sequence name excluding common file ending. E.g., file "Sample_1_S1_L005_R1_001.fastq.gz" would have sequence name "Sample_1"
 
-
-### 3.3) Sample name list
+##### Sample name list
 `names_samples=./namelist_samples.txt`
 - One name per line
 - In exactly same order as sequence names
@@ -82,13 +83,13 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 - Each name must be unique
 
 
-### 3.4) Enable software
+### 3.2) Enable software
 ```
 source activate
 conda activate
 ```
 
-### 3.5) Namelists
+### 3.3) Get names for samples
 #### Sequence names
 `name_sequence=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_sequences)`
 
@@ -100,46 +101,51 @@ conda activate
 name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
 ```
 
-
-### 3.6) Adapter and quality trimming
+### 3.4) Pre-processing of query reads
+#### 3.4.1) Adapter and quality trimming (CHANGE FILE ENDING IF NEEDED)
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence"_S1_L005_R1_001.fastq.gz -baseout "$name_sequence".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 - Files are assumed to be ending with "_S1_L005_R1_001.fastq.gz" or "_S2_L005_R1_001.fastq.gz", otherwise please change
 
-### 3.7) Removal of non-calamoid reads
+#### 3.4.2) Removal of non-calamoid reads
 `kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sequence"#P_decontaminated.fastq "$name_sequence"_1P.fastq.gz "$name_sequence"_2P.fastq.gz`
 
-### 3.8) Merging of reads
+#### 3.4.3) Merging of reads
 `bbmerge.sh in1="$name_sequence"_1P_decontaminated.fastq in2="$name_sequence"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t`
 
-### 3.9) Normalisation of reads
+#### 3.4.4) Normalisation of reads
 `seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq`
 - Normalise query by downsampling to 500,000 reads (same as reference)
 
 
-### 3.10) Query sample against reference
-#### Calculate genetic distances between query and reference
+### 3.5) Query sample against reference
+#### 3.5.1) Calculate genetic distances between query and reference
 `skmer query "$name_sample".fastq "$skmer_db" -p 4 -o dist`
 
-#### Rename file
+#### 3.5.2) Rename file
 `mv dist-"$name_lower".txt "$name_sample"_distances.txt`
 
-#### Summarise (Query sample name, cleaned merged reads of query, closest reference (identification), minimum genomic distance to closest reference)
+#### 3.5.3) Summarise results
 ```
 echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_sample"_summary.txt
 (echo "$name_sample" "$name_sequence"; (echo $(cat $name_sample.fastq | wc -l)/4|bc); (sed -n '2 p' "$name_sample"_distances.txt)) | tr "\n" " " >> "$name_sample"_summary.txt
 ```
+- Query sample name
+- Query sequence name
+- Number of cleaned merged reads of query
+- Identification (reference with smallest genomic distance to query) 
+- Minimum genomic distance any reference sample (i.e. genomic distance to identification)
 
-#### Data check
+#### 3.5.4) Data check
 `awk 'NR==1{print $0, "data_check"; next}; {data_check="FAIL"}; 100000<=$3 && 500000>$3 && 0.05>=$5 {data_check="WARN"}; 500000<=$3 && 0.05>=$5 {data_check="PASS"}; {print $0, data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt`
 - `PASS` if reads >= 500,000 and min genomic distance <= 0.05
 - `WARN` if reads between 100,000 and 500,000 and min genomic distance <= 0.05
 - `FAIL` otherwise
 
-#### Overwrite summary file to include new info
+#### 3.5.5) Overwrite summary file to include new info
 `mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt`
 
 
-### 3.11) Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
+### 3.6) Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
 `rm "$name_sequence"_{1,2}{U,P}.fastq.gz` 
 - Remove trimmed reads
 
@@ -155,5 +161,6 @@ echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_
 `rm "$name_sample"_kraken.txt`
 - Remove kraken report
 
-## 4) Upon completion of individual runs, combine files using the following line of code
+## 4) Combine summary files
 `cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
+- Do this upon completion of the individual runs
