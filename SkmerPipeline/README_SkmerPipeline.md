@@ -72,7 +72,7 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 ##### Sequence name list
 `names_sequences=./namelist_sequences.txt`
 - One name per line
-- Sequence name excluding common file ending. E.g., file "Sample_1_S1_L005_R1_001.fastq.gz" would have sequence name "Sample_1"
+- Sequence name excluding common file ending. E.g., file "BKL006_S1_L005_R1_001.fastq.gz" would have sequence name "BKL006"
 ###### Example sequence name list
 ```
 BKL006
