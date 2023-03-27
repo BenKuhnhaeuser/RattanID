@@ -8,7 +8,8 @@ Identification of rattan palms and rattan furniture using genome-scale data
 - [VSEARCH pipeline](VSEARCH_Pipeline): Identification using A353 and PhyloPalm target capture data
 
 
-Reference data needed to run these analyses can be found here: https://doi.org/10.5281/zenodo.7733000
+Reference data needed to run these analyses can be found here: https://doi.org/10.5281/zenodo.7733000  
 - Sequencing adapters
 - Kraken database for decontamination
-- Skmer reference database for identification
+- Skmer reference database
+- VSEARCH reference database
