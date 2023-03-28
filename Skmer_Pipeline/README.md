@@ -58,7 +58,7 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 `adapters=./adapters/TruSeq3-PE-2.fa`
 
 ##### Kraken database directory for decontamination
-`kraken_db_calamoideae=./db_calamoideae/`
+`kraken_db=./kraken_db_calamoideae/`
 
 ##### Skmer genomic reference database directory for identification
 `skmer_db=./skmer_reference_db_normalised_5e5reads/`
