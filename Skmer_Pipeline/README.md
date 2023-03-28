@@ -67,7 +67,7 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 #### 3.1.2) Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 ##### Raw data
 `data_directory=./data/`
-- directory with paired end read data
+- Directory with paired end read data
 
 ##### File ending
 file_ending="_S1_L005_R1_001.fastq.gz"
