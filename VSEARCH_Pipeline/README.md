@@ -40,8 +40,8 @@ You can use the provided slurm script "vsearch_raw_to_query.sh". Detailed explan
 #SBATCH -J vsearch_pipeline
 #SBATCH -c 8
 #SBATCH --mem=16GB
-#SBATCH -o logs/skmer_pipeline_%A_%a.out
-#SBATCH -e logs/skmer_pipeline_%A_%a.err
+#SBATCH -o logs/vsearch_pipeline_%A_%a.out
+#SBATCH -e logs/vsearch_pipeline_%A_%a.err
 ```
 
 - `-D` Working directory
@@ -60,13 +60,21 @@ You can use the provided slurm script "vsearch_raw_to_query.sh". Detailed explan
 ##### Kraken database directory for decontamination
 `kraken_db_calamoideae=./db_calamoideae/`
 
-##### Skmer genomic reference database directory for identification
-`skmer_db=./skmer_reference_db_normalised_5e5reads/`
+##### Target file for retrieving targeted genes
+`targetfile=./vsearch_targetfile.fasta`
+
+##### VSEARCH genomic reference database directory for identification
+`vsearch_db=./vsearch_reference_db/`
 
 
 #### 3.1.2) Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
-##### Raw data directory with paired read data
+##### Raw data
 `data_directory=./data/`
+- Directory with paired end read data
+
+##### File ending
+file_ending="_S1_L005_R1_001.fastq.gz"
+- Common ending of forward read, excluding sequence name. E.g., for the file `BKL006_S1_L005_R2_001.fastq.gz` the sequence name is `BKL006` and the file ending is `_S1_L005_R1_001.fastq.gz`
 
 ##### Sequence name list
 `names_sequences=./namelist_sequences.txt`
@@ -96,7 +104,7 @@ Calamus_sp_3_Kuhnhaeuser_71_BKL182
 ### 3.2) Enable software
 ```
 source activate
-conda activate
+conda activate hybpiper
 ```
 
 ### 3.3) Get sequence and sample name for query
@@ -106,60 +114,77 @@ conda activate
 #### Sample names
 `name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_samples)`
 
-#### Sample names, but in lower case (needed for Skmer output)
-```
-name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
-```
 
 ### 3.4) Pre-processing of query reads
 #### 3.4.1) Adapter and quality trimming (CHANGE FILE ENDING IF NEEDED)
-`trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence"_S1_L005_R1_001.fastq.gz -baseout "$name_sequence".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
+`trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 - Files are assumed to be ending with "_S1_L005_R1_001.fastq.gz" or "_S2_L005_R1_001.fastq.gz", otherwise please change
 
 #### 3.4.2) Removal of non-calamoid reads
-`kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sequence"#P_decontaminated.fastq "$name_sequence"_1P.fastq.gz "$name_sequence"_2P.fastq.gz`
+`kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sample"#P_decontaminated.fastq "$name_sample"_1P.fastq.gz "$name_sample"_2P.fastq.gz`
 
-#### 3.4.3) Merging of reads
-`bbmerge.sh in1="$name_sequence"_1P_decontaminated.fastq in2="$name_sequence"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t`
+#### 3.4.3) Get genes
+##### Assemble
+`hybpiper assemble --readfiles "$name_sample"_{1,2}P_decontaminated.fastq --targetfile_aa "$targetfile" --cov_cutoff 3 --prefix "$name_sample" --timeout_assemble 600 --timeout_exonerate_contigs 600 --cpu 8`
 
-#### 3.4.4) Normalisation of reads
-`seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq`
-- Normalise query by downsampling to 500,000 reads (same as reference)
+##### Retrieve
+`hybpiper retrieve_sequences dna --targetfile_aa "$targetfile" --single_sample_name "$name_sample"`
+
+##### Save genes into separate files
+`mkdir -p "$name_sample"/genes`
+- Make directory
+
+```
+for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do samtools faidx "$name_sample"/"$gene"/"$name_sample"/sequences/FNA/"$gene".FNA "$name_sample" > "$name_sample"/genes/"$gene".FNA; done
+```
+- Save gene into file
 
 
 ### 3.5) Query sample against reference
-#### 3.5.1) Calculate genetic distances between query and reference
-`skmer query "$name_sample".fastq "$skmer_db" -p 4 -o dist`
+#### 3.5.1) Make directory for query results
+`mkdir -p "$name_sample"/queries`
 
-#### 3.5.2) Rename file
-`mv dist-"$name_lower".txt "$name_sample"_distances.txt`
+#### 3.5.2) Conduct query against reference for each gene retrieve for sample
+`for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do vsearch --db "$vsearch_db"/"$gene"_gene.fasta --usearch_global "$name_sample"/genes/"$gene".FNA --userfields query+target+id1+id2+ql+tl+alnlen+qcov+tcov+mism+opens+gaps+pctgaps --userout "$name_sample"/queries/vsearch_"$gene".tsv --id 0.5; done`
+- Query against reference
 
 #### 3.5.3) Summarise results
-```
-echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_sample"_summary.txt
-(echo "$name_sample" "$name_sequence"; (echo $(cat $name_sample.fastq | wc -l)/4|bc); (sed -n '2 p' "$name_sample"_distances.txt)) | tr "\n" " " >> "$name_sample"_summary.txt
-```
+##### Concatenate individual results
+`cat "$name_sample"/queries/vsearch_*.tsv | cut -f 2 | cut -f 1,2 -d "_" | sort | uniq -c | sort -k1 -nr > "$name_sample"/queries/tmp.txt`
+
+##### If resulting file is empty, write minimal output into file
+`if [[ ! -s "$name_sample"/queries/tmp.txt ]]; then echo -e "0\tNA" > "$name_sample"/queries/tmp.txt; fi`
+
+##### Calculate percentages, unless file is empty (then output NAs)
+`awk -v name_sample=$name_sample 'FNR==NR{sum += $1; next}; sum>0 {print name_sample "\t" $2 "\t" $1 "\t" $1/sum*100}; sum==0 {print  name_sample "\t" "NA" "\t" "0" "\t" "NA"}' "$name_sample"/queries/tmp.txt "$name_sample"/queries/tmp.txt > "$name_sample"_vsearch.txt`
+
+##### Add header row
+`sed -i '1i Query\tIdentification\tCount\tPercentage' "$name_sample"_vsearch.txt`
 - Query sample name
 - Query sequence name
-- Number of cleaned merged reads of query
-- Identification (reference with smallest genomic distance to query) 
-- Minimum genomic distance any reference sample (i.e. genomic distance to identification)
+- Count of genes supporting species identification
+- Percentage of genes supporting species identification relative to total number of genes retrieved for sample
+
+##### Retrieve top hit
+`head -2 "$name_sample"_vsearch.txt > "$name_sample"_summary.txt`
+
 
 #### 3.5.4) Data check
-`awk 'NR==1{print $0, "data_check"; next}; {data_check="FAIL"}; 100000<=$3 && 500000>$3 && 0.05>=$5 {data_check="WARN"}; 500000<=$3 && 0.05>=$5 {data_check="PASS"}; {print $0, data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt`
-- `PASS` if reads >= 500,000 and min genomic distance <= 0.05
-- `WARN` if reads between 100,000 and 500,000 and min genomic distance <= 0.05
-- `FAIL` otherwise
+`awk 'NR==1{print $0, "Data_check"; next}; $3<2 {Data_check="FAIL"}; $3>=2 && $3<35 {Data_check="WARN"}; $3>=35 {Data_check="PASS"}; {print $0, Data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt`
+- `PASS` if top hit has at least 35 hits
+- `WARN` if top hit has at least 2 but fewer than 35 hits
+- `FAIL` if no genes retrieved
+
 
 #### 3.5.5) Overwrite summary file to include new info
 `mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt`
 
 
 ### 3.6) Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
-`rm "$name_sequence"_{1,2}{U,P}.fastq.gz` 
+`rm "$name_sample"_{1,2}{U,P}.fastq.gz` 
 - Remove trimmed reads
 
-`rm "$name_sequence"_{1,2}P_decontaminated.fastq`
+`rm "$name_sample"_{1,2}P_decontaminated.fastq`
 - Remove decontaminated reads
 
 `rm "$name_sample"_merged.fastq`
