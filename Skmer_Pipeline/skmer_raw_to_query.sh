@@ -106,10 +106,10 @@ mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
 # Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
 #----------
 # Remove trimmed reads
-rm "$name_sequence"_{1,2}{U,P}.fastq.gz
+rm "$name_sample"_{1,2}{U,P}.fastq.gz
 
 # Remove decontaminated reads
-rm "$name_sequence"_{1,2}P_decontaminated.fastq
+rm "$name_sample"_{1,2}P_decontaminated.fastq
 
 # Remove merged reads
 rm "$name_sample"_merged.fastq
