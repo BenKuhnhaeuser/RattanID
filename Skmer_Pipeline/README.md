@@ -68,10 +68,14 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 ##### Raw data directory with paired read data
 `data_directory=./data/`
 
+##### File ending
+file_ending="_S1_L005_R1_001.fastq.gz"
+- Common ending of forward read, excluding sequence name. E.g., for the file `BKL006_S1_L005_R2_001.fastq.gz` the sequence name is `BKL006` and the file ending is `_S1_L005_R1_001.fastq.gz`
+
 ##### Sequence name list
 `names_sequences=./namelist_sequences.txt`
 - One name per line
-- Sequence name excluding common file ending. E.g., file "BKL006_S1_L005_R1_001.fastq.gz" would have sequence name "BKL006"
+- Sequence name excluding common file ending. E.g., file `BKL006_S1_L005_R1_001.fastq.gz` would have sequence name `BKL006`
 ###### Example sequence name list
 ```
 BKL006
@@ -113,7 +117,7 @@ name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
 
 ### 3.4) Pre-processing of query reads
 #### 3.4.1) Adapter and quality trimming (CHANGE FILE ENDING IF NEEDED)
-`trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence"_S1_L005_R1_001.fastq.gz -baseout "$name_sequence".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
+`trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sequence".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 - Files are assumed to be ending with "_S1_L005_R1_001.fastq.gz" or "_S2_L005_R1_001.fastq.gz", otherwise please change
 
 #### 3.4.2) Removal of non-calamoid reads
