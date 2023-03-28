@@ -60,7 +60,7 @@ You can use the provided slurm script "vsearch_raw_to_query.sh". Detailed explan
 `adapters=./adapters/TruSeq3-PE-2.fa`
 
 ##### Kraken database directory for decontamination
-`kraken_db_calamoideae=./db_calamoideae/`
+`kraken_db=./kraken_db_calamoideae/`
 
 ##### Target file for retrieving targeted genes
 `targetfile=./vsearch_targetfile.fasta`
