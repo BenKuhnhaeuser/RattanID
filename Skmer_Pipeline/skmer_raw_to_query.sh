@@ -60,17 +60,17 @@ name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
 # Trim (CHANGE FILE ENDING IF NEEDED)
 #------
 # Adapter and quality trimming
-trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sequence".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36
+trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36
 
 
 # Decontaminate
 #---------------
-kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sequence"#P_decontaminated.fastq "$name_sequence"_1P.fastq.gz "$name_sequence"_2P.fastq.gz
+kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sample"#P_decontaminated.fastq "$name_sample"_1P.fastq.gz "$name_sample"_2P.fastq.gz
 
 
 # Merge
 #-------
-bbmerge.sh in1="$name_sequence"_1P_decontaminated.fastq in2="$name_sequence"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t
+bbmerge.sh in1="$name_sample"_1P_decontaminated.fastq in2="$name_sample"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t
 
 # Normalise
 #-----------
