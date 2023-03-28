@@ -20,8 +20,8 @@ Installation using anaconda is recommended. Script is verified to work with the 
 - Trimmomatic 0.39
 - bbmap 38.96
 - Kraken 2.1.2
-- Skmer 3.2.1
 - seqtk 1.3-r106  
+- Skmer 3.2.1
 
 
 ## 3) Run the identification pipeline for each sample
