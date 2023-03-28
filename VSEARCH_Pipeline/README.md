@@ -1,7 +1,7 @@
 # VSEARCH Pipeline
 
 ## 0) Overview
-This VSEARCH Pipeline processes all samples to identify and for each sample:
+This VSEARCH Pipeline utilises genomic information contained in short read target capture data. It processes all samples to identify as follows:
 - removes low quality and non-Calamoid sequences
 - retrieves genes with high information content for identification
 - conducts a search against the reference database for each retrieved gene
