@@ -13,6 +13,7 @@ This VSEARCH Pipeline utilises genomic information contained in short read targe
 Download these from Zenodo: https://doi.org/10.5281/zenodo.7733000
 - Sequencing adapters file
 - Kraken database for decontamination
+- Target file for retrieving genes
 - VSEARCH genomic reference database for identification
 
 
@@ -21,7 +22,8 @@ Installation using anaconda is recommended. Script is verified to work with the 
 - Trimmomatic 0.39
 - bbmap 38.96
 - Kraken 2.1.2
-- HybPiper
+- HybPiper 2.1.1
+- VSEARCH 2.21.1
 
 
 ## 3) Run the identification pipeline for each sample
@@ -130,14 +132,13 @@ conda activate hybpiper
 ##### Retrieve
 `hybpiper retrieve_sequences dna --targetfile_aa "$targetfile" --single_sample_name "$name_sample"`
 
-##### Save genes into separate files
+##### Make new directory
 `mkdir -p "$name_sample"/genes`
-- Make directory
 
+##### Retrieve genes and save them into the new directory
 ```
 for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do samtools faidx "$name_sample"/"$gene"/"$name_sample"/sequences/FNA/"$gene".FNA "$name_sample" > "$name_sample"/genes/"$gene".FNA; done
 ```
-- Save gene into file
 
 
 ### 3.5) Query sample against reference
