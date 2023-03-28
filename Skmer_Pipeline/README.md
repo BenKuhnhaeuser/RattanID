@@ -1,7 +1,7 @@
 # Skmer Pipeline
 
 ## 0) Overview
-This Skmer Pipeline takes all the samples to identify and for each sample:
+This Skmer Pipeline utilises genomic information contained in short read genome skim ('shotgun') data. It processes all samples to identify as follows:
 - removes low quality and non-Calamoid sequences
 - calculates its genetic distance with all species in the reference database (based on sequence composition; give skmer ref)
 - provides the genetically closest reference species to the sample
