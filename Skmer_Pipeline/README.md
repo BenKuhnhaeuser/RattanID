@@ -117,14 +117,14 @@ name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
 
 ### 3.4) Pre-processing of query reads
 #### 3.4.1) Adapter and quality trimming (CHANGE FILE ENDING IF NEEDED)
-`trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sequence".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
+`trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 - Files are assumed to be ending with "_S1_L005_R1_001.fastq.gz" or "_S2_L005_R1_001.fastq.gz", otherwise please change
 
 #### 3.4.2) Removal of non-calamoid reads
-`kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sequence"#P_decontaminated.fastq "$name_sequence"_1P.fastq.gz "$name_sequence"_2P.fastq.gz`
+`kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sample"#P_decontaminated.fastq "$name_sample"_1P.fastq.gz "$name_sample"_2P.fastq.gz`
 
 #### 3.4.3) Merging of reads
-`bbmerge.sh in1="$name_sequence"_1P_decontaminated.fastq in2="$name_sequence"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t`
+`bbmerge.sh in1="$name_sample"_1P_decontaminated.fastq in2="$name_sample"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t`
 
 #### 3.4.4) Normalisation of reads
 `seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq`
@@ -160,10 +160,10 @@ echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_
 
 
 ### 3.6) Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
-`rm "$name_sequence"_{1,2}{U,P}.fastq.gz` 
+`rm "$name_sample"_{1,2}{U,P}.fastq.gz` 
 - Remove trimmed reads
 
-`rm "$name_sequence"_{1,2}P_decontaminated.fastq`
+`rm "$name_sample"_{1,2}P_decontaminated.fastq`
 - Remove decontaminated reads
 
 `rm "$name_sample"_merged.fastq`
