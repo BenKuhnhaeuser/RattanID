@@ -1,7 +1,7 @@
 # VSEARCH Pipeline
 
 ## 0) Overview
-This VSEARCH Pipeline takes all the samples to identify and for each sample:
+This VSEARCH Pipeline processes all samples to identify and for each sample:
 - removes low quality and non-Calamoid sequences
 - retrieves genes with high information content for identification
 - conducts a search against the reference database for each retrieved gene
