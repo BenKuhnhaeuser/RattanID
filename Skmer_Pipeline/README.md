@@ -48,7 +48,7 @@ You can use the provided slurm script "skmer_raw_to_query.sh". Detailed explanat
 - `-p` Partition to run analyses on
 - `-J` Job name
 - `-c` Number of cores to use
-- `--mem` Memory allocation
+- `--mem` Memory allocation. At least 4GB should be allocated.
 - `-o` and `-e` Logged outputs and error messages
 
 
