@@ -12,4 +12,5 @@ Reference data needed to run these analyses can be found here: https://doi.org/1
 - Sequencing adapters
 - Kraken database for decontamination
 - Skmer reference database
+- Target file for retrieving genes
 - VSEARCH reference database
