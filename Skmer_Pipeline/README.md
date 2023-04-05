@@ -49,8 +49,8 @@ Download these from Zenodo: https://doi.org/10.5281/zenodo.7733000
 - Sample name list
   * One name per line
   * In exactly same order as sequence names
-  * No whitespace (" "), no special characters such as "/", "?", "*", ","
-  * Underscores ("_") are ok
+  * No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`.
+  * Underscores `_` are ok.
   * Each name must be unique
   * Example sample name list:
     ```
