@@ -90,7 +90,12 @@ Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `
 `mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt`
 
 #### Examine results of Skmer identification pipeline:
-`cat "$name_sample"_summary.txt`
+- Genomic distances of query sample to all reference samples:  
+  `cat "$name_sample"_distances.txt`
+    * The smaller the distance, the more closely related is the query to the reference sample
+    * The reference sample with the smallest distance is regarded as the main identification
+- Main identification of query sample, including summary statistics:  
+  `cat "$name_sample"_summary.txt`
 
 ## Clean up intermediate files
 - Remove trimmed reads: `rm "$name_sample"_{1,2}{U,P}.fastq.gz`
@@ -98,3 +103,7 @@ Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `
 - Remove merged reads: `rm "$name_sample"_merged.fastq`
 - Remove normalised reads: `rm "$name_sample".fastq`
 - Remove kraken report: `rm "$name_sample"_kraken.txt`
+
+## Combine results of multiple identifications
+`cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
+- Do this upon completion of several individual Skmer Pipeline runs
