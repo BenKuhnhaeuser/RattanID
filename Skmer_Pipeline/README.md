@@ -82,4 +82,5 @@ Download these from Zenodo: https://doi.org/10.5281/zenodo.7733000
 - Can out-comment remove commands if wanting to keep specific files
 
 ## Combine summary files
+`cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
 - Do this upon completion of the individual Skmer Pipeline runs
