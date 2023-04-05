@@ -2,10 +2,10 @@
 
 ## Overview
 The [Skmer Pipeline](skmer_raw_to_query.sh) utilises genomic information contained in short read genome skim data. It processes all samples to identify as follows:
-- removes low quality and non-Calamoid sequences
-- calculates its genetic distance with all species in the reference database (based on sequence composition; give skmer ref)
-- provides the genetically closest reference species to the sample
-- checks if there was enough data and if the genetic distance is small enough for the results to be reliable
+- remove low quality and non-Calamoid sequences
+- calculate genetic distance to all species in the reference database
+- provide the genetically closest reference species to the sample
+- check if there was enough data and if the genetic distance is small enough for the results to be reliable
 
 ## Required software
 Installation using anaconda is recommended. Script is verified to work with the indicated software versions.
