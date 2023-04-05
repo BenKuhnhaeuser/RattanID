@@ -37,12 +37,12 @@ Download these from Zenodo: https://doi.org/10.5281/zenodo.7733000
 - Sequence name list
   * One name per line
   * Sequence name excluding common file ending. E.g., file `BKL006_S1_L005_R1_001.fastq.gz` would have sequence name `BKL006`
-  * Example sequence name list
-```
-BKL006
-BKL054
-BKL182
-```
+  * Example sequence name list:
+    ```
+    BKL006
+    BKL054
+    BKL182
+    ```
 
 - Sample name list
   * One name per line
@@ -50,12 +50,12 @@ BKL182
   * No whitespace (" "), no special characters such as "/", "?", "*", ","
   * Underscores ("_") are ok
   * Each name must be unique
-  * Example sample name list
-```
-Calamus_sp_1_Baker_561_BKL006
-Calamus_sp_2_Henderson_3289_BKL054
-Calamus_sp_3_Kuhnhaeuser_71_BKL182
-```
+  * Example sample name list:
+    ```
+    Calamus_sp_1_Baker_561_BKL006
+    Calamus_sp_2_Henderson_3289_BKL054
+    Calamus_sp_3_Kuhnhaeuser_71_BKL182
+    ```
 
 ### Pre-process query reads
 - Adapter and quality trimming
