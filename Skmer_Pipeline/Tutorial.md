@@ -20,25 +20,31 @@ Script is verified to work with the indicated software versions.
 Installation using anaconda is recommended. Enable software installed with anaconda using `conda activate`.
 
 
-## Specify reference data locations (adapt path as needed)
-- Specify sequencing adapters file: `adapters=./adapters/TruSeq3-PE-2.fa`
-- Kraken database directory for decontamination: `kraken_db=./kraken_db_calamoideae/`
-- Skmer genomic reference database directory for identification: `skmer_db=./skmer_reference_db_normalised_5e5reads/`
+## Specify reference data (adapt path as needed)
+- Specify sequencing adapters file  
+  `adapters=./adapters/TruSeq3-PE-2.fa`
+- Kraken database directory for decontamination  
+  `kraken_db=./kraken_db_calamoideae/`
+- Skmer genomic reference database directory for identification  
+  `skmer_db=./skmer_reference_db_normalised_5e5reads/`
 
 Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.7733000
 
-## Specify query data locations (adapt path as needed)
-- Directory containing raw `.fastq.gz` data files with paired end reads: `data_directory=./data/`
-- File endings of raw data files `file_ending="_S1_L005_R1_001.fastq.gz"`
+## Specify query data (adapt path as needed)
+- Directory containing paired end raw `.fastq.gz` data files  
+  `data_directory=./data/`
+- File ending of raw data files  
+  `file_ending="_S1_L005_R1_001.fastq.gz"`
   * Common ending of forward read, excluding sequence name. E.g., for the file `BKL006_S1_L005_R2_001.fastq.gz` the sequence name is `BKL006` and the file ending is `_S1_L005_R1_001.fastq.gz`
-
-## Specify sequence name and corresponding sample name
-- Sequence name: `name_sequence="BKL006"`
-- Sample name: `name_sample="Calamus_sp_1_Baker_561_BKL006"`
-- Sample name, but in lower case (needed for Skmer output). Based on `name_sample` input given above: 
-  ```
-  name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
-  ```
+- Sequence name and corresponding sample name
+  * Sequence name  
+    `name_sequence="BKL006"`
+  * Sample name  
+    `name_sample="Calamus_sp_1_Baker_561_BKL006"`
+  * Sample name, but in lower case (needed for Skmer output). Based on `name_sample` input given above:  
+    ```
+    name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
+    ```
 
 Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_` are ok.
 
