@@ -4,7 +4,7 @@ Rattans are spiny climbing palms – their long, flexible stems are the source o
 
 The RattanID molecular identification toolkit enables the identification of rattan palms and furniture using genomic information. It is based on a comprehensive genomic reference database containing 99% of all rattan species. 
 
-We have developed two approaches for genomic identification of rattans:
+We have developed two approaches for the identification of rattans using genomic data:
 - [Skmer pipeline](Skmer_Pipeline): Identification using genome skims
 - [VSEARCH pipeline](VSEARCH_Pipeline): Identification using A353 and PhyloPalm target capture data
 
