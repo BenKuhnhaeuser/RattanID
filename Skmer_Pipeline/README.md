@@ -7,7 +7,7 @@ The [Skmer Pipeline](skmer_raw_to_query.sh) utilises genomic information contain
 - provide the genetically closest reference species to the sample
 - check if there was enough data and if the genetic distance is small enough for the results to be reliable
 
-Check out the [tutorial](Tutorial.md) to test identification of a single sample using the Skmer Pipeline step by step.
+Check out the [tutorial](Tutorial.md) to walk through the identification of a single sample using the Skmer Pipeline, step by step.
 
 ## Preparations
 ### Required software
