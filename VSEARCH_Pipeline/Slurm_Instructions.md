@@ -1,6 +1,8 @@
 # VSEARCH Pipeline - processing of multiple samples using Slurm
 
-For batch processing of multiple samples at a high performance computing facility, you can use the provided [slurm script](vsearch_raw_to_query.sh). Here, we provide instructions on what preparations and modifications to the script are needed, and how to execute the script.
+We recommend to first familiarise yourself with running the pipeline for a single sample using the [tutorial](Tutorial.md).
+
+For batch processing of multiple samples at a high performance computing facility, you can use the provided [slurm script](vsearch_raw_to_query.sh). Here, we provide instructions on what preparations and modifications to running the script are needed, and how to execute it.
 
 ## Preparations
 ### Install required software using anaconda
