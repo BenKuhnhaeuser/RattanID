@@ -118,9 +118,8 @@ conda activate hybpiper
 
 
 ### 3.4) Pre-processing of query reads
-#### 3.4.1) Adapter and quality trimming (CHANGE FILE ENDING IF NEEDED)
+#### 3.4.1) Adapter and quality trimming
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
-- Files are assumed to be ending with "_S1_L005_R1_001.fastq.gz" or "_S2_L005_R1_001.fastq.gz", otherwise please change
 
 #### 3.4.2) Removal of non-calamoid reads
 `kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sample"#P_decontaminated.fastq "$name_sample"_1P.fastq.gz "$name_sample"_2P.fastq.gz`
