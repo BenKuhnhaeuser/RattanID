@@ -9,4 +9,4 @@ Our VSEARCH Pipeline utilises genomic information contained in short read target
 
 The [tutorial](Tutorial.md) goes step by step through the molecular identification workflow of a single sample using our VSEARCH Pipeline. 
 
-For batch processing of multiple samples, we also provide a [slurm script](vsearch_raw_to_query.sh). See instructions [here](Slurm_Instructions.md). 
+For batch processing of multiple samples, we also provide a [slurm script](vsearch_raw_to_query.sh). See instructions [here](Slurm_Instructions.md).
