@@ -7,7 +7,8 @@ The [Skmer Pipeline](skmer_raw_to_query.sh) utilises genomic information contain
 - provide the genetically closest reference species to the sample
 - check if there was enough data and if the genetic distance is small enough for the results to be reliable
 
-The tutorial given here shows the workflow for a single sample, step by step.
+The tutorial given here shows the workflow for a single sample, step by step.  
+Recommended computational resource allocation: 4 cores, 4GB memory.
 
 ## Install required software
 Script is verified to work with the indicated software versions.
