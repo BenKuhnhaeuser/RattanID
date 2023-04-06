@@ -90,7 +90,7 @@ Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `
 #### Overwrite summary file to include new info
 `mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt`
 
-#### Examine results of Skmer identification pipeline:
+## Examine results
 - Genomic distances of query sample to all reference samples:  
   `cat "$name_sample"_distances.txt`
     * The smaller the distance, the more closely related is the query to the reference sample
@@ -107,4 +107,4 @@ Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `
 
 ## Combine results of multiple identifications
 `cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
-- Do this upon completion of several individual Skmer Pipeline runs
+- Do this upon completion of several individual pipeline runs
