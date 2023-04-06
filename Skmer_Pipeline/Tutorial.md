@@ -1,13 +1,10 @@
 # Skmer Pipeline Tutorial
 
-## Overview
-The [Skmer Pipeline](skmer_raw_to_query.sh) utilises genomic information contained in short read genome skim data. It processes all samples to identify as follows:
-- remove low quality and non-Calamoid sequences
-- calculate genetic distance to all species in the reference database
-- provide the genetically closest reference species to the sample
-- check if there was enough data and if the genetic distance is small enough for the results to be reliable
+This tutorial goes through the molecular identification workflow of a single sample using our Skmer Pipeline, step by step.  
 
-The tutorial given here shows the workflow for a single sample, step by step.  
+For batch processing of multiple samples, follow the instructions [here](Slurm_Instructions.md).
+
+## Computational resources
 Recommended computational resource allocation: 4 cores, 4GB memory.
 
 ## Install required software
