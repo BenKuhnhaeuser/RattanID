@@ -120,4 +120,4 @@ Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.773300
 
 ## Combine results of multiple identifications
 `cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
-- Do this upon completion of the individual runs
+- Do this upon completion of several individual pipeline runs
