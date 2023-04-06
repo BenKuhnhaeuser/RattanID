@@ -8,6 +8,7 @@ This VSEARCH Pipeline utilises genomic information contained in short read targe
 - generates a 'majority vote' consensus identification based on the individual gene identifications
 - checks if there was enough data for the results to be reliable
 
+Check out the [tutorial](Tutorial.md) to walk through the identification of a single sample using the VSEARCH Pipeline, step by step.
 
 ## 1) Reference data
 Download these from Zenodo: https://doi.org/10.5281/zenodo.7733000
@@ -30,7 +31,6 @@ Installation using anaconda is recommended. Script is verified to work with the 
 You can use the provided slurm script "vsearch_raw_to_query.sh". Detailed explanations of the script are below. The script needs to be run for each sample. Needed preparations and changes to the script:
 - Create a directory called `logs` to which log files are written (otherwise the Slurm script will fail)
 - Specify file and directory locations in beginning of script
-- Change file endings of raw reads at trimming step
 - If you want to keep intermediate files, out-comment delete commands in end of script
 
 ### Script header
