@@ -18,6 +18,30 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
 - Target file for retrieving genes
 - VSEARCH genomic reference database for identification
 
+### Make lists of sequence names and corresponding sample names
+- List of sequence names  
+  * One name per line
+  *  Sequence name excluding common file ending. E.g., file "BKL006_S1_L005_R1_001.fastq.gz" would have sequence name "BKL006"
+  *   Example sequence name list: [namelist_sequences.txt](../example/namelist_sequences.txt)  
+      ```
+      BKL006
+      BKL054
+      BKL182
+      ```
+
+- List of sample names  
+  * One name per line
+  * **In exactly same order as sequence names**
+  * No whitespace (" "), no special characters such as "/", "?", "*", ","
+  * Underscores ("_") are ok
+  * Each name must be unique
+  * Example sample name list: [namelist_samples.txt](../example/namelist_samples.txt)  
+    ```
+    Calamus_sp_1_Baker_561_BKL006
+    Calamus_sp_2_Henderson_3289_BKL054
+    Calamus_sp_3_Kuhnhaeuser_71_BKL182
+    ```
+
 ### Create directory for log files
 `mkdir logs`
 - the  `logs` directory needs to be in the working directory specified in the slurm script
@@ -69,28 +93,10 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
 
 - List of sequence names  
   `names_sequences=./namelist_sequences.txt`
-  * One name per line
-  *  Sequence name excluding common file ending. E.g., file "BKL006_S1_L005_R1_001.fastq.gz" would have sequence name "BKL006"
-  *   Example sequence name list: [namelist_sequences.txt](../example/namelist_sequences.txt)  
-      ```
-      BKL006
-      BKL054
-      BKL182
-      ```
 
 - List of sample names  
   `names_samples=./namelist_samples.txt`
-  * One name per line
-  * **In exactly same order as sequence names**
-  * No whitespace (" "), no special characters such as "/", "?", "*", ","
-  * Underscores ("_") are ok
-  * Each name must be unique
-  * Example sample name list: [namelist_samples.txt](../example/namelist_samples.txt)  
-    ```
-    Calamus_sp_1_Baker_561_BKL006
-    Calamus_sp_2_Henderson_3289_BKL054
-    Calamus_sp_3_Kuhnhaeuser_71_BKL182
-    ```
+
 
 ## Submit Slurm job array
 `sbatch --array=1-3%1 vsearch_raw_to_query.sh`
