@@ -1,6 +1,6 @@
 # VSEARCH Pipeline - processing of multiple samples using Slurm
 
-For batch processing of multiple samples, you can use the provided [slurm script](vsearch_raw_to_query.sh). Here, we provide instructions on what preparations and modifications to the script are needed, and how to execute the script.
+For batch processing of multiple samples at a high performance computing facility, you can use the provided [slurm script](vsearch_raw_to_query.sh). Here, we provide instructions on what preparations and modifications to the script are needed, and how to execute the script.
 
 ## Preparations
 ### Install required software using anaconda
@@ -22,6 +22,7 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
 `mkdir logs`
 - the  `logs` directory needs to be in the working directory specified in the slurm script
 - if not specified, Slurm job will fail
+
 
 ## Modifications to Slurm script
 ### Adjust script header as needed
@@ -90,3 +91,12 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
     Calamus_sp_2_Henderson_3289_BKL054
     Calamus_sp_3_Kuhnhaeuser_71_BKL182
     ```
+
+## Submit Slurm job array
+`sbatch --array=1-3%1 vsearch_raw_to_query.sh`
+- This submits the first three samples that are specified in the name lists, one at a time
+- Adapt as needed
+
+## Combine summary files
+`cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
+- Do this upon completion of the individual runs
