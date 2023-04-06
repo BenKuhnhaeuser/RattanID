@@ -45,7 +45,7 @@ Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.773300
   * Sample name  
     `name_sample="Calamus_sp_1_Baker_561_BKL006"`
 
-Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_` are ok.
+    Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_` are ok.
 
 ## Pre-process query reads
 ### Adapter and quality trimming
