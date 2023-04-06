@@ -1,14 +1,7 @@
 # VSEARCH Pipeline Tutorial
 
-## Overview
-The [VSEARCH Pipeline](vsearch_raw_to_query.sh) utilises genomic information contained in short read target capture data. It processes all samples to identify as follows:
-- remove low quality and non-Calamoid sequences
-- retrieve genes with high information content for identification
-- conduct a search against the reference database for each retrieved gene
-- generate a 'majority vote' consensus identification based on the individual gene identifications
-- checks if there was enough data for the results to be reliable
+This tutorial goes through the molecular identification workflow of a single sample using our VSEARCH Pipeline, step by step. 
 
-The tutorial given here shows the workflow for a single sample, step by step.  
 Recommended computational resource allocation: 8 cores, 16GB memory.
 
 ## Install required software
