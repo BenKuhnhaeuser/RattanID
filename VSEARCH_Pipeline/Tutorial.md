@@ -89,7 +89,7 @@ Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.773300
   * `Count`: Number of genes supporting species identification
   * `Percentage`: Percentage of genes supporting species identification relative to total number of genes retrieved for sample
 
-### Summarise query results for main identification (top hit)
+### Retrieve main identification
 - Retrieve top hit  
   `head -2 "$name_sample"_vsearch.txt > "$name_sample"_summary.txt`
 
@@ -101,6 +101,12 @@ Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.773300
 
 - Overwrite summary file to include new info  
   `mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt`
+
+## Examine results
+- Complete results for the sample:  
+  `cat "$name_sample"_vsearch.txt`
+- Main identification of query sample, including summary statistics:  
+  `cat "$name_sample"_summary.txt`
 
 ## Clean up intermediate files
 - Remove trimmed reads: `rm "$name_sample"_{1,2}{U,P}.fastq.gz`
