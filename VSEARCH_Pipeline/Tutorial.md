@@ -1,6 +1,8 @@
 # VSEARCH Pipeline Tutorial
 
-This tutorial goes through the molecular identification workflow of a single sample using our VSEARCH Pipeline, step by step. 
+This tutorial goes through the molecular identification workflow of a single sample using our VSEARCH Pipeline, step by step.  
+
+For batch processing of multiple samples, follow the instructions [here](Slurm_Instructions.md).
 
 Recommended computational resource allocation: 8 cores, 16GB memory.
 
