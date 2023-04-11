@@ -4,10 +4,11 @@ This tutorial goes through the molecular identification workflow of a single sam
 
 For batch processing of multiple samples, follow the instructions [here](Slurm_Instructions.md).
 
-## Computational resources
+## Preparations
+### Computational resources
 Recommended computational resource allocation: 4 cores, 4GB memory.
 
-## Install required software
+### Install required software
 Script is verified to work with the indicated software versions.
 - Trimmomatic 0.39
 - bbmap 38.96
@@ -17,7 +18,7 @@ Script is verified to work with the indicated software versions.
 
 Installation using anaconda is recommended. Enable software installed with anaconda using `conda activate`.
 
-## Download reference data 
+### Download reference data 
 Download the following data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
 - `adapters.tar.gz`: Sequencing adapters file for adapter removal (for Illumina paired-end sequencing data)
 - `kraken_db_calamoideae.tar.gz`: Kraken database for removal of non-calamoid DNA
@@ -28,12 +29,12 @@ Uncompress directories
 - `tar -xzvf kraken_db_calamoideae.tar.gz`
 - `tar -xzvf skmer_reference_db_normalised_5e5reads.tar.gz`
 
-## Download query data 
+### Download query data 
 If you don't have your own data yet but want to test the pipeline now, you can download example data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
 - Download `example_data_skim.tar`
 - Uncompress using `tar -xvf example_data_skim.tar`
 
-## Specify reference data (adapt path as needed)
+### Specify reference data (adapt path as needed)
 - Specify sequencing adapters file  
   `adapters=./adapters/TruSeq3-PE-2.fa`
 - Kraken database directory for decontamination  
@@ -41,7 +42,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - Skmer genomic reference database directory for identification  
   `skmer_db=./skmer_reference_db_normalised_5e5reads/`
 
-## Specify query data (adapt path as needed)
+### Specify query data (adapt path as needed)
 - Directory containing paired end raw `.fastq.gz` data files  
   `data_directory=./data/`
 - File ending of raw data files  
