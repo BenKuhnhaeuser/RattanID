@@ -27,7 +27,7 @@ Download the following data from Zenodo (https://doi.org/10.5281/zenodo.7733000)
 Uncompress directories
 - `tar -xzvf adapters.tar.gz`
 - `tar -xzvf kraken_db_calamoideae.tar.gz`
-- `tar -xzvf skmer_reference_db_normalised_5e5reads.tar.gz`
+- `tar -xzvf skmer_reference_db.tar.gz`
 
 ### Download query data 
 If you don't have your own data yet but want to test the pipeline now, you can download example data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
@@ -38,9 +38,9 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - Specify sequencing adapters file  
   `adapters=./adapters/TruSeq3-PE-2.fa`
 - Kraken database directory for decontamination  
-  `kraken_db=./kraken_db_calamoideae/`
+  `kraken_db=./db_calamoideae/`
 - Skmer genomic reference database directory for identification  
-  `skmer_db=./skmer_reference_db_normalised_5e5reads/`
+  `skmer_db=./skmer_reference_db/`
 
 ### Specify query data (adapt path as needed)
 - Directory containing paired end raw `.fastq.gz` data files  
