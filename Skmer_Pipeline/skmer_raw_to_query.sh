@@ -19,13 +19,13 @@
 adapters=./adapters/TruSeq3-PE-2.fa
 
 # Kraken database directory for decontamination
-kraken_db=./kraken_db_calamoideae/
+kraken_db=./db_calamoideae/
 
 # Skmer genomic reference database directory for identification
-skmer_db=./skmer_reference_db_normalised_5e5reads/
+skmer_db=./skmer_reference_db/
 
 
-# Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
+# Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS AND FILE ENDINGS)
 #------------
 # Raw data directory
 ## needs to contain paired end reads
