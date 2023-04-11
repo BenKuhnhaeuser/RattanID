@@ -38,7 +38,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - Specify sequencing adapters file  
   `adapters=./adapters/TruSeq3-PE-2.fa`
 - Kraken database directory for decontamination  
-  `kraken_db=./kraken_db_calamoideae/`
+  `kraken_db=./db_calamoideae/`
 - Target file for retrieving targeted genes  
   `targetfile=./vsearch_targetfile.fasta`
 - VSEARCH genomic reference database directory for identification  
