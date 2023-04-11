@@ -23,7 +23,7 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
 ### Make lists of sequence names and corresponding sample names
 - List of sequence names  
   * One name per line
-  *  Sequence name excluding common file ending. E.g., file "BKL006_S1_L005_R1_001.fastq.gz" would have sequence name "BKL006"
+  *  Sequence name excluding common file ending. E.g., file "BKL001_S1_L005_R1_001.fastq.gz" would have sequence name "BKL001"
   *   Example sequence name list: [namelist_sequences.txt](../example/namelist_sequences.txt)  
 
 - List of sample names  
