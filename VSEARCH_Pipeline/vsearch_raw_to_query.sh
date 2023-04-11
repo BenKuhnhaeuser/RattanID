@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH -D /home/bkuhnhae/projects/rbgk/users_area/bkuhnhae/analyses/identification/ikea/analyses/vsearch/test
+#SBATCH -D ~/analyses/
 #SBATCH -p long
 #SBATCH -J vsearch_pipeline
 #SBATCH -c 8
@@ -8,6 +8,10 @@
 #SBATCH -o logs/vsearch_pipeline_%A_%a.out
 #SBATCH -e logs/vsearch_pipeline_%A_%a.err
 
+
+#----------------
+# Preparations
+#----------------
 
 # Reference data (NEED TO SPECIFY FILE LOCATIONS)
 #----------------
@@ -55,6 +59,10 @@ name_sequence=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $nam
 name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_samples)
 
 
+#----------------
+Pre-processing
+#----------------
+
 # Trim
 #------
 # Adapter and quality trimming
@@ -80,6 +88,10 @@ mkdir -p "$name_sample"/genes
 # Save gene into file
 for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do samtools faidx "$name_sample"/"$gene"/"$name_sample"/sequences/FNA/"$gene".FNA "$name_sample" > "$name_sample"/genes/"$gene".FNA; done
 
+
+#----------------
+Identification
+#----------------
 
 # Query
 #-------
@@ -119,6 +131,7 @@ awk 'NR==1{print $0, "Data_check"; next}; $3<2 {Data_check="FAIL"}; $3>=2 && $3<
 mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
 
 
+#-----------------------------
 # Clean up intermediate files (Out-comment if want to keep any)
 #-----------------------------
 # Remove trimmed reads
