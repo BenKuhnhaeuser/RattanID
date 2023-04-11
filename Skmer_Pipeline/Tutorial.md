@@ -26,7 +26,7 @@ Installation using anaconda is recommended. Enable software installed with anaco
 - Skmer genomic reference database directory for identification  
   `skmer_db=./skmer_reference_db_normalised_5e5reads/`
 
-Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.7733000
+Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.7733000. Compressed files and directories (ending with `.tar.gz`) need to be uncompressed, e.g. using `tar -xzvf`.
 
 ## Specify query data (adapt path as needed)
 - Directory containing paired end raw `.fastq.gz` data files  
