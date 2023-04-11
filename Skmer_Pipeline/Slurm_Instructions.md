@@ -22,13 +22,8 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
 ### Make lists of sequence names and corresponding sample names
 - List of sequence names  
   * One name per line
-  *  Sequence name excluding common file ending. E.g., file "BKL006_S1_L005_R1_001.fastq.gz" would have sequence name "BKL006"
+  *  Sequence name excluding common file ending. E.g., file "BKL001_S1_L005_R1_001.fastq.gz" would have sequence name "BKL001"
   *   Example sequence name list: [namelist_sequences.txt](../example/namelist_sequences.txt)  
-      ```
-      BKL006
-      BKL054
-      BKL182
-      ```
 
 - List of sample names  
   * One name per line
@@ -37,11 +32,6 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
   * Underscores ("_") are ok
   * Each name must be unique
   * Example sample name list: [namelist_samples.txt](../example/namelist_samples.txt)  
-    ```
-    Calamus_sp_1_Baker_561_BKL006
-    Calamus_sp_2_Henderson_3289_BKL054
-    Calamus_sp_3_Kuhnhaeuser_71_BKL182
-    ```
 
 ### Create directory for log files
 `mkdir logs`
@@ -87,7 +77,7 @@ Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
 
 - File endings  
   `file_ending="_S1_L005_R1_001.fastq.gz"`
-  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL006_S1_L005_R2_001.fastq.gz` the sequence name is `BKL006` and the file ending is `_S1_L005_R1_001.fastq.gz`
+  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`
 
 - List of sequence names  
   `names_sequences=./namelist_sequences.txt`
