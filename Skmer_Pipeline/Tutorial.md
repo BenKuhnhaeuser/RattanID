@@ -17,6 +17,21 @@ Script is verified to work with the indicated software versions.
 
 Installation using anaconda is recommended. Enable software installed with anaconda using `conda activate`.
 
+## Download reference data 
+Download the following data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
+- `adapters.tar.gz`: Sequencing adapters file for adapter removal (for Illumina paired-end sequencing data)
+- `kraken_db_calamoideae.tar.gz`: Kraken database for removal of non-calamoid DNA
+- `skmer_reference_db_normalised_5e5reads.tar.gz`: Skmer genomic reference database directory for identification  
+
+Uncompress directories
+- `tar -xzvf adapters.tar.gz`
+- `tar -xzvf kraken_db_calamoideae.tar.gz`
+- `tar -xzvf skmer_reference_db_normalised_5e5reads.tar.gz`
+
+## Download query data 
+If you don't have your own data yet but want to test the pipeline now, you can download example data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
+- Download `example_data_skim.tar`
+- Uncompress using `tar -xvf example_data_skim.tar`
 
 ## Specify reference data (adapt path as needed)
 - Specify sequencing adapters file  
@@ -25,8 +40,6 @@ Installation using anaconda is recommended. Enable software installed with anaco
   `kraken_db=./kraken_db_calamoideae/`
 - Skmer genomic reference database directory for identification  
   `skmer_db=./skmer_reference_db_normalised_5e5reads/`
-
-Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.7733000. Compressed files and directories (ending with `.tar.gz`) need to be uncompressed, e.g. using `tar -xzvf`.
 
 ## Specify query data (adapt path as needed)
 - Directory containing paired end raw `.fastq.gz` data files  
