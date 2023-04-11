@@ -13,13 +13,13 @@
 # Preparations
 #----------------
 
-# Reference data (NEED TO SPECIFY FILE LOCATIONS)
+# Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
 # Sequencing adapters file
 adapters=./adapters/TruSeq3-PE-2.fa
 
 # Kraken database directory for decontamination
-kraken_db=./kraken_db_calamoideae/
+kraken_db=./db_calamoideae/
 
 # Target file for retrieving targeted genes
 targetfile=./vsearch_targetfile.fasta
@@ -28,7 +28,7 @@ targetfile=./vsearch_targetfile.fasta
 vsearch_db=./vsearch_reference_db/
 
 
-# Query data (NEED TO SPECIFY FILE LOCATIONS)
+# Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS AND FILE ENDINGS)
 #------------
 # Raw data (paired end)
 data_directory=./data/
