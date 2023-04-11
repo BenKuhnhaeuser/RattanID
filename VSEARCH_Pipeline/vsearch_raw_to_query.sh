@@ -30,11 +30,12 @@ vsearch_db=./vsearch_reference_db/
 
 # Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS AND FILE ENDINGS)
 #------------
-# Raw data (paired end)
+# Raw data directory
+## needs to contain paired end reads
 data_directory=./data/
 
 # File ending
-## Common ending of forward read, excluding sample name (e.g. for the file "BKL001_S1_L005_R2_001.fastq.gz" the sample name is "BKL001" and the file ending is "_S1_L005_R1_001.fastq.gz")
+## Common ending of forward read, excluding sample name
 file_ending="_S1_L005_R1_001.fastq.gz"
 
 # Sequence name list, one per line
@@ -50,7 +51,7 @@ source activate
 conda activate
 
 
-# Namelists
+# Get sequence and sample name
 #-----------
 # Sequence names
 name_sequence=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_sequences)
@@ -85,7 +86,7 @@ hybpiper retrieve_sequences dna --targetfile_aa "$targetfile" --single_sample_na
 # Make directory
 mkdir -p "$name_sample"/genes
 
-# Save gene into file
+# Save genes into file
 for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do samtools faidx "$name_sample"/"$gene"/"$name_sample"/sequences/FNA/"$gene".FNA "$name_sample" > "$name_sample"/genes/"$gene".FNA; done
 
 
@@ -124,15 +125,15 @@ head -2 "$name_sample"_vsearch.txt > "$name_sample"_summary.txt
 # Data check
 ## PASS if top hit has at least 35 hits
 ## WARN if top hit has at least 2 but fewer than 35 hits
-## FAIL if no genes retrieved
+## FAIL if less than 2 genes retrieved
 awk 'NR==1{print $0, "Data_check"; next}; $3<2 {Data_check="FAIL"}; $3>=2 && $3<35 {Data_check="WARN"}; $3>=35 {Data_check="PASS"}; {print $0, Data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt
 
-# Overwrite summary file to include new info
+# Overwrite summary file to include the data check information  
 mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
 
 
 #-----------------------------
-# Clean up intermediate files (Out-comment if want to keep any)
+# Clean up intermediate files
 #-----------------------------
 # Remove trimmed reads
 rm "$name_sample"_{1,2}{U,P}.fastq.gz
@@ -145,7 +146,7 @@ rm "$name_sample"_{1,2}P_decontaminated.fastq
 
 # Remove assembled genes and vsearch queries
 mkdir "$name_sample"_empty_dir_tmp
-#rsync -a --delete "$name_sample"_empty_dir_tmp/ "$name_sample"
+rsync -a --delete "$name_sample"_empty_dir_tmp/ "$name_sample"
 rmdir "$name_sample"_empty_dir_tmp "$name_sample"
 
 rm "$name_sample"_FNA.fasta
