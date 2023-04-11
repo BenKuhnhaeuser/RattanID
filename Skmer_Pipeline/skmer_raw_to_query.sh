@@ -9,6 +9,10 @@
 #SBATCH -e logs/skmer_pipeline_%A_%a.err
 
 
+#----------------
+# Preparations
+#----------------
+
 # Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
 # Sequencing adapters file
@@ -56,8 +60,11 @@ name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names
 name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
 
 
+#----------------
+Pre-processing
+#----------------
 
-# Trim (CHANGE FILE ENDING IF NEEDED)
+# Trim
 #------
 # Adapter and quality trimming
 trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36
@@ -77,6 +84,10 @@ bbmerge.sh in1="$name_sample"_1P_decontaminated.fastq in2="$name_sample"_2P_deco
 # Normalise query by downsampling to 500,000 reads (same as reference)
 seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq
 
+
+#----------------
+Identification
+#----------------
 
 # Query
 #-------
@@ -103,8 +114,9 @@ awk 'NR==1{print $0, "Data_check"; next}; {Data_check="FAIL"}; 100000<=$3 && 500
 mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
 
 
+#-----------------------------
 # Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
-#----------
+#-----------------------------
 # Remove trimmed reads
 rm "$name_sample"_{1,2}{U,P}.fastq.gz
 
