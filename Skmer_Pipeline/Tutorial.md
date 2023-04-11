@@ -9,14 +9,14 @@ For batch processing of multiple samples, follow the instructions [here](Slurm_I
 Recommended computational resource allocation: 4 cores, 4GB memory.
 
 ### Install required software
-Script is verified to work with the indicated software versions.
+The script is verified to work with the indicated software versions.
 - Trimmomatic 0.39
 - bbmap 38.96
 - Kraken 2.1.2
 - seqtk 1.3-r106  
 - Skmer 3.2.1
 
-Installation using anaconda is recommended. Enable software installed with anaconda using `conda activate`.
+Installation using anaconda is recommended.
 
 ### Download reference data 
 Download the following data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
@@ -43,7 +43,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
   `skmer_db=./skmer_reference_db/`
 
 ### Specify query data (adapt path as needed)
-- Directory containing paired end raw `.fastq.gz` data files  
+- Directory containing compressed paired end raw data files (`.fastq.gz`)  
   `data_directory=./data/`
 - File ending of raw data files  
   `file_ending="_S1_L005_R1_001.fastq.gz"`
@@ -58,9 +58,12 @@ If you don't have your own data yet but want to test the pipeline now, you can d
     name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
     ```
 
-Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_` are ok.
+Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_`, hyphens `-` and full stops `.` are ok.
 
 ## Pre-process query reads
+### Enable software installed with Anaconda
+`conda activate`  
+
 ### Adapter and quality trimming
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 
