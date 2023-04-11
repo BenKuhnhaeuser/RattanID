@@ -4,11 +4,14 @@ Our Skmer Pipeline utilises genomic information contained in short read genome s
 - removes low quality and non-Calamoid sequences using Trimmomatic and Kraken
 - calculates the genetic distances between the sample and each species of the reference database using Skmer
 - returns the reference species is genetically closest to the sample
-- checks if there was enough data and if the genetic distance is small enough for the results to be reliable
-  
-If the data check is passed, the sample can be tentatively identified as belonging to the genetically closest reference species.
+- checks if there was enough data and if the genetic distance is small enough for the results to be reliable. There are three possible outcomes:
+  * `PASS`: the identification is likely correct
+  * `WARN`: the identification is less certain
+  * `FAIL`: the identification is likely wrong
 
-The [tutorial](Tutorial.md) goes step by step through the molecular identification workflow of a single sample using the pipeline. For batch processing of multiple samples, we also provide a [slurm script](skmer_raw_to_query.sh). See instructions [here](Slurm_Instructions.md).
+The [tutorial](Tutorial.md) goes step by step through the molecular identification workflow of a single sample using the pipeline.  
+
+For batch processing of multiple samples, we also provide a [slurm script](skmer_raw_to_query.sh). See instructions [here](Slurm_Instructions.md).
 
 ### Reference data
 Reference data needed to run the pipeline can be found [here](https://doi.org/10.5281/zenodo.7733000). You need the following data:
