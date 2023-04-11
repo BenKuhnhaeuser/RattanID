@@ -10,7 +10,6 @@ Recommended computational resource allocation: 8 cores, 16GB memory.
 ## Install required software
 Script is verified to work with the indicated software versions.
 - Trimmomatic 0.39
-- bbmap 38.96
 - Kraken 2.1.2
 - HybPiper 2.1.1
 - VSEARCH 2.21.1
@@ -27,7 +26,7 @@ Installation using anaconda is recommended. Enable software installed with anaco
 - VSEARCH genomic reference database directory for identification  
   `vsearch_db=./vsearch_reference_db/`
 
-Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.7733000
+Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.7733000. Compressed files and directories (ending with `.tar.gz`) need to be uncompressed, e.g. using `tar -xzvf`.
 
 ## Specify query data (adapt path as needed)
 - Directory containing paired end raw `.fastq.gz` data files  
