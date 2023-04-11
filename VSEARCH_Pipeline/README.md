@@ -4,8 +4,8 @@ Our VSEARCH Pipeline utilises genomic information contained in short read target
 - removes low quality and non-Calamoid sequences
 - retrieves genes with high information content for identification
 - conducts a search against the reference database for each retrieved gene
-- generates a 'majority vote' consensus identification based on the individual gene identifications
-- checks if there was enough data for the results to be reliable. There are three possible outcomes:
+- generates an identification based on the consensus of the individual identifications of each gene
+- checks if there was enough data for the identification to be reliable. There are three possible outcomes:
   * `PASS`: the identification is likely correct
   * `WARN`: the identification is less certain
   * `FAIL`: the identification is likely wrong
