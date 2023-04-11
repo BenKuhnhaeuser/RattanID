@@ -14,11 +14,21 @@ Script is verified to work with the indicated software versions.
 - VSEARCH 2.21.1
 
 ### Download reference data 
-Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
-- Sequencing adapters file
-- Kraken database for decontamination
-- Target file for retrieving genes
-- VSEARCH genomic reference database for identification
+Download the following data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
+- `adapters.tar.gz`: Sequencing adapters for adapter removal (for Illumina paired-end sequencing data)
+- `kraken_db_calamoideae.tar.gz`: Kraken database for removal of non-calamoid DNA
+- `vsearch_targetfile.fasta`: Target file for retrieving genes
+- `vsearch_reference_db.tar.gz`: VSEARCH reference database  
+
+Uncompress directories
+- `tar -xzvf adapters.tar.gz`
+- `tar -xzvf kraken_db_calamoideae.tar.gz`
+- `tar -xzvf vsearch_reference_db.tar.gz`
+
+### Download query data 
+If you don't have your own data yet but want to test the pipeline now, you can download example data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
+- Download `example_data_targetcapture.tar`
+- Uncompress using `tar -xvf example_data_targetcapture.tar`  
 
 ### Make lists of sequence names and corresponding sample names
 - List of sequence names  
