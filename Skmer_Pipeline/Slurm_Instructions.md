@@ -24,7 +24,7 @@ Uncompress directories
 - `tar -xzvf kraken_db_calamoideae.tar.gz`
 - `tar -xzvf skmer_reference_db_normalised_5e5reads.tar.gz`
 
-### Download example query data 
+### Download query data 
 If you don't have your own data yet but want to test the pipeline now, you can download example data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
 - Download `example_data_skim.tar`
 - Uncompress using `tar -xvf example_data_skim.tar`
