@@ -32,7 +32,7 @@ skmer_db=./skmer_reference_db/
 data_directory=./data/
 
 # File ending
-## Common ending of forward read, excluding sample name (e.g. for the file "BKL001_S1_L005_R2_001.fastq.gz" the sample name is "BKL001" and the file ending is "_S1_L005_R1_001.fastq.gz")
+## Common ending of forward read, excluding sample name
 file_ending="_S1_L005_R1_001.fastq.gz"
 
 # Sequence name list
@@ -48,15 +48,15 @@ source activate
 conda activate
 
 
-# Namelists
+# Get sequence and sample name
 #-----------
-# Sequence names
+# Sequence name
 name_sequence=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_sequences)
 
-# Sample names
+# Sample name
 name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names_samples)
 
-# Sample names, but in lower case (needed for Skmer output)
+# Sample name, but in lower case (needed for Skmer output)
 name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
 
 
@@ -115,7 +115,7 @@ mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
 
 
 #-----------------------------
-# Clean up intermediate files (OUT-COMMENT IF WANT TO KEEP)
+# Clean up intermediate files
 #-----------------------------
 # Remove trimmed reads
 rm "$name_sample"_{1,2}{U,P}.fastq.gz
