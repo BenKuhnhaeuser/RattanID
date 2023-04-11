@@ -3,8 +3,8 @@
 Our Skmer Pipeline utilises genomic information contained in short read genome skim data. It processes all samples to reveal their species identity as follows:
 - removes low quality and non-Calamoid sequences using Trimmomatic and Kraken
 - calculates the genetic distances between the sample and each species of the reference database using Skmer
-- returns the reference species is genetically closest to the sample
-- checks if there was enough data and if the genetic distance is small enough for the results to be reliable. There are three possible outcomes:
+- generates an identification by returning the reference species that is genetically closest to the sample
+- checks if there was enough data and if the genetic distance is small enough for the identification to be reliable. There are three possible outcomes:
   * `PASS`: the identification is likely correct
   * `WARN`: the identification is less certain
   * `FAIL`: the identification is likely wrong
