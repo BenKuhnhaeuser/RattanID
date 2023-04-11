@@ -1,3 +1,3 @@
-Calamus_sp_1_Baker_561_BKL006
-Calamus_sp_2_Henderson_3289_BKL054
-Calamus_sp_3_Kuhnhaeuser_71_BKL182
+Rattan_A_Kuhnhaeuser_L001
+Rattan_B_Kuhnhaeuser_L002
+Rattan_C_Kuhnhaeuser_L003
