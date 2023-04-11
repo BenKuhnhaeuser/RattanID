@@ -14,10 +14,20 @@ Script is verified to work with the indicated software versions.
 - Skmer 3.2.1
 
 ### Download reference data 
-Download from Zenodo: https://doi.org/10.5281/zenodo.7733000
-- Sequencing adapters file
-- Kraken database for decontamination
-- Skmer genomic reference database directory for identification 
+Download the following data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
+- `adapters.tar.gz`: Sequencing adapters file for adapter removal (for Illumina paired-end sequencing data)
+- `kraken_db_calamoideae.tar.gz`: Kraken database for removal of non-calamoid DNA
+- `skmer_reference_db_normalised_5e5reads.tar.gz`: Skmer genomic reference database directory for identification  
+
+Uncompress directories
+- `tar -xzvf adapters.tar.gz`
+- `tar -xzvf kraken_db_calamoideae.tar.gz`
+- `tar -xzvf skmer_reference_db_normalised_5e5reads.tar.gz`
+
+### Download example query data 
+If you don't have your own data yet but want to test the pipeline now, you can download example data from Zenodo (https://doi.org/10.5281/zenodo.7733000):
+- Download `example_data_skim.tar`
+- Uncompress using `tar -xvf example_data_skim.tar`
 
 ### Make lists of sequence names and corresponding sample names
 - List of sequence names  
