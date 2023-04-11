@@ -24,4 +24,4 @@ This pipeline incorporates several software tools. Please credit them by citing 
 - Bolger, A.M., Lohse, M., Usadel, B., 2014. Trimmomatic: a flexible trimmer for Illumina sequence data. Bioinformatics 30, 2114-2120. https://doi.org/10.1093/bioinformatics/btu170
 - Wood, D.E., Lu, J., Langmead, B., 2019. Improved metagenomic analysis with Kraken 2. Genome Biol. 20, 257. https://doi.org/10.1186/s13059-019-1891-0
 - Bushnell, B., Rood, J., Singer, E., 2017. BBMerge – accurate paired shotgun read merging via overlap. Plos One 12, e0185056. https://doi.org/10.1371/journal.pone.0185056
-- Li, H., Seqtk. https://github.com/lh3/seqtk/
+- Li, H., Seqtk. https://github.com/lh3/seqtk
