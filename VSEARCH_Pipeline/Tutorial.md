@@ -33,12 +33,12 @@ Download these reference data from Zenodo: https://doi.org/10.5281/zenodo.773300
   `data_directory=./data/`
 - File ending of raw data files  
   `file_ending="_S1_L005_R1_001.fastq.gz"`
-  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL006_S1_L005_R2_001.fastq.gz` the sequence name is `BKL006` and the file ending is `_S1_L005_R1_001.fastq.gz`
+  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`
 - Sequence name and corresponding sample name
   * Sequence name  
-    `name_sequence="BKL006"`
+    `name_sequence="BKL001"`
   * Sample name  
-    `name_sample="Calamus_sp_1_Baker_561_BKL006"`
+    `name_sample="Rattan_A_Kuhnhaeuser_BKL001"`
 
     Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_` are ok.
 
