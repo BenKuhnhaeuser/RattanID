@@ -31,11 +31,10 @@ vsearch_db=./vsearch_reference_db/
 # Query data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS AND FILE ENDINGS)
 #------------
 # Raw data directory
-## needs to contain paired end reads
 data_directory=./data/
 
 # File ending
-## Common ending of forward read, excluding sample name
+## Common ending of forward reads, excluding sample name
 file_ending="_S1_L005_R1_001.fastq.gz"
 
 # Sequence name list, one per line
@@ -131,7 +130,7 @@ mv "$name_sample"_summary_tmp.txt "$name_sample"_summary.txt
 
 
 #-----------------------------
-# Clean up intermediate files
+# Clean up intermediate files (DEACTIVATE COMMANDS USING `#` IF WANTING TO KEEP FILES)
 #-----------------------------
 # Remove trimmed reads
 rm "$name_sample"_{1,2}{U,P}.fastq.gz
