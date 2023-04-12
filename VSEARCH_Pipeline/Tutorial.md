@@ -57,18 +57,20 @@ If you don't have your own data yet but want to test the pipeline now, you can d
     `name_sample="Rattan_A"`  
     Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_`, hyphens `-` and full stops `.` are ok. It is possible to provide identical sequence and sample names.
 
-## Pre-process query reads
 ### Enable software installed with Anaconda
 `conda activate`  
 
-### Adapter and quality trimming
-Removal of adapter sequences and trimming of low quality sequence parts  
+## Pre-process query reads
+### Adapter and quality trimming 
+Remove adapter sequences and trim sequence parts with low quality score.  
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 
 ### Remove non-calamoid reads
+Classify reads as calamoid or non-calamoid by comparison to calamoid genomes. Discard non-calamoid reads.  
 `kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sample"#P_decontaminated.fastq "$name_sample"_1P.fastq.gz "$name_sample"_2P.fastq.gz`
 
 ### Get genes
+Assemble and retrieve genes from the raw data using the target file. Save them to a new directory.
 - Assemble genes from raw data  
   `hybpiper assemble --readfiles "$name_sample"_{1,2}P_decontaminated.fastq --targetfile_aa "$targetfile" --cov_cutoff 3 --prefix "$name_sample" --timeout_assemble 600 --timeout_exonerate_contigs 600 --cpu 8`
 
@@ -84,11 +86,10 @@ Removal of adapter sequences and trimming of low quality sequence parts
   ```
 
 ## Query sample against reference
-### Search query against reference for each gene retrieved for sample 
-- Make directory for results to be saved  
+### Make directory for results to be saved  
   `mkdir -p "$name_sample"/queries`
 
-- Conduct search  
+### Search query against reference for each gene retrieved for sample 
   ```
   for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do vsearch --db "$vsearch_db"/"$gene"_gene.fasta --usearch_global "$name_sample"/genes/"$gene".FNA --userfields query+target+id1+id2+ql+tl+alnlen+qcov+tcov+mism+opens+gaps+pctgaps --userout "$name_sample"/queries/vsearch_"$gene".tsv --id 0.5; done
   ```
