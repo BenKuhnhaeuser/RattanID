@@ -34,37 +34,40 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - Download `example_data_skim.tar`
 - Uncompress using `tar -xvf example_data_skim.tar`
 
-### Specify reference data (adapt path as needed)
-- Specify sequencing adapters file  
+### Specify reference data as needed
+- Sequencing adapters file for adapter removal    
   `adapters=./adapters/TruSeq3-PE-2.fa`
-- Kraken database directory for decontamination  
+- Kraken database directory for removal of non-calamoid DNA  
   `kraken_db=./db_calamoideae/`
 - Skmer genomic reference database directory for identification  
   `skmer_db=./skmer_reference_db/`
 
-### Specify query data (adapt path as needed)
+### Specify query data as needed
 - Directory containing compressed paired end raw data files (`.fastq.gz`)  
   `data_directory=./data/`
 - File ending of raw data files  
-  `file_ending="_S1_L005_R1_001.fastq.gz"`
-  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`
+  `file_ending="_S1_L005_R1_001.fastq.gz"`  
+  This should be the common ending of all the files containing forward reads, excluding the parts that are specific to each sample. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`.
 - Sequence name and corresponding sample name
+  Note: The pipeline replaces the sequence name by the sample name. 
   * Sequence name  
     `name_sequence="BKL001"`
   * Sample name  
-    `name_sample="Rattan_A_Kuhnhaeuser_BKL001"`
+    `name_sample="Rattan_A"`  
+    Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_`, hyphens `-` and full stops `.` are ok. It is possible to provide identical sequence and sample names.
   * Sample name, but in lower case (needed for Skmer output). Based on `name_sample` input given above:  
     ```
     name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
     ```
 
-Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_`, hyphens `-` and full stops `.` are ok.
+
 
 ## Pre-process query reads
 ### Enable software installed with Anaconda
 `conda activate`  
 
 ### Adapter and quality trimming
+Removal of adapter sequences and trimming of low quality sequence parts  
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 
 ### Remove non-calamoid reads
@@ -77,14 +80,14 @@ Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `
 `seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq`
 
 ## Query sample against reference
-### Calculate genetic distances between query and refereence samples
+### Calculate genetic distances between query and reference samples
 `skmer query "$name_sample".fastq "$skmer_db" -p 4 -o dist`
 
 ### Rename output from default lowercase output to original file name
 `mv dist-"$name_lower".txt "$name_sample"_distances.txt`
 
-### Summarise query results
-#### Write header line
+### Summarise results in a table
+#### Create file with table header to store results
 `echo "sample_id" "sequence_id" "reads" "identification" "min_distance" > "$name_sample"_summary.txt`
 - `sample_id`: Query sample name
 - `sequence_id`: Query sequence name
@@ -92,10 +95,11 @@ Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `
 - `identification`: Reference species with smallest genomic distance to query
 - `min_distance`: Smallest genomic distances between query and reference (i.e. genomic distance between query and `identification`)
 
-#### Add query results to file
+#### Add results to file
 `(echo "$name_sample" "$name_sequence"; (echo $(cat $name_sample.fastq | wc -l)/4|bc); (sed -n '2 p' "$name_sample"_distances.txt)) | tr "\n" " " >> "$name_sample"_summary.txt`
 
-#### Conduct check whether minimum data requirements were fulfilled for results to be reliable, add this as a new column `Data_check`
+#### Add data check
+Check whether minimum data requirements were fulfilled for results to be reliable, add this as a new column `Data_check`  
 `awk 'NR==1{print $0, "Data_check"; next}; {Data_check="FAIL"}; 100000<=$3 && 500000>$3 && 0.05>=$5 {Data_check="WARN"}; 500000<=$3 && 0.05>=$5 {Data_check="PASS"}; {print $0, Data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt`
 - `PASS` if reads >= 500,000 and min genomic distance <= 0.05
 - `WARN` if reads between 100,000 and 500,000 and min genomic distance <= 0.05
