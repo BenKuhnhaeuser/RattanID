@@ -2,11 +2,11 @@
 
 We recommend to first familiarise yourself with running the pipeline for a single sample using the [tutorial](Tutorial.md).
 
-For batch processing of multiple samples at a high performance computing facility, you can use the provided [slurm script](vsearch_raw_to_query.sh). Here, we provide instructions on what preparations and modifications to running the script are needed, and how to execute it.
+For batch processing of multiple samples at a high performance computing facility, you can use the provided [slurm script](vsearch_raw_to_query.sh). Here, we provide instructions to prepare the software and data, to modify the script to fit your dataset, and to execute the script.
 
 ## Preparations
 ### Install required software using anaconda
-Script is verified to work with the indicated software versions.
+The script is verified to work with the indicated software versions.
 - Trimmomatic 0.39
 - bbmap 38.96
 - Kraken 2.1.2
@@ -38,9 +38,9 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 
 - List of sample names  
   * One name per line
-  * **In exactly same order as sequence names**
+  * **In exactly the same order as sequence names**
   * No whitespace (" "), no special characters such as "/", "?", "*", ","
-  * Underscores ("_") are ok
+  * Underscores `_`, hyphens `-` and full stops `.` are ok.
   * Each name must be unique
   * Example sample name list: [namelist_samples.txt](../example/namelist_samples.txt)  
 
@@ -71,7 +71,8 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - `--mem` Memory allocation. At least 16GB should be allocated.
 - `-o` and `-e` Logged outputs and error messages
 
-### Specify reference file locations
+
+### Specify reference data as needed
 - Sequencing adapters file  
   `adapters=./adapters/TruSeq3-PE-2.fa`
 
@@ -85,13 +86,13 @@ If you don't have your own data yet but want to test the pipeline now, you can d
   `vsearch_db=./vsearch_reference_db/`
 
 
-### Specify query file locations
+### Specify query data as needed
 - Raw data  
   `data_directory=./data/`
 
 - File endings  
-  `file_ending="_S1_L005_R1_001.fastq.gz"`
-  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`
+  `file_ending="_S1_L005_R1_001.fastq.gz"`  
+  This should be the common ending of all the files containing forward reads, excluding the parts that are specific to each sample. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`.
 
 - List of sequence names  
   `names_sequences=./namelist_sequences.txt`
@@ -102,8 +103,8 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 
 ## Submit Slurm job array
 `sbatch --array=1-3%1 vsearch_raw_to_query.sh`
-- This submits the first three samples that are specified in the name lists, one at a time
-- Adapt as needed
+- This submits the first three samples that are specified in the name lists `1-3`, one at a time `%1`
+- Adapt as needed. For example, `--array=4-100%5` would submit samples 4 to 100 of the name lists, processing five samples in parallel
 
 ## Combine summary files
 `cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
