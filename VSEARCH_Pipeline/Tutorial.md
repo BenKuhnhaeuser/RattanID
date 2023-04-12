@@ -86,10 +86,11 @@ Assemble and retrieve genes from the raw data using the target file. Save them t
   ```
 
 ## Query sample against reference
-### Make directory for results to be saved  
+### Search query against reference for each gene retrieved for sample 
+- Make directory for results to be saved  
   `mkdir -p "$name_sample"/queries`
 
-### Search query against reference for each gene retrieved for sample 
+- Search query against reference  
   ```
   for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do vsearch --db "$vsearch_db"/"$gene"_gene.fasta --usearch_global "$name_sample"/genes/"$gene".FNA --userfields query+target+id1+id2+ql+tl+alnlen+qcov+tcov+mism+opens+gaps+pctgaps --userout "$name_sample"/queries/vsearch_"$gene".tsv --id 0.5; done
   ```
