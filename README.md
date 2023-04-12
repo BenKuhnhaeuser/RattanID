@@ -1,5 +1,7 @@
 # RattanID
 
+![image](https://user-images.githubusercontent.com/56020162/231502405-1e07a2e3-d497-442d-985c-9d67ab1b3032.png)
+
 Rattans are spiny climbing palms – their long, flexible stems are the source of rattan cane, which is harvested mainly from the wild. Rattan is the raw material on which a multibillion-dollar trade in cane furniture and other woven articles are built. Out of the ca. 500 species of rattan palms worldwide, numerous are reported to be utilised for cane products. The accurate identification of rattan species based on their morphology can be challenging because of the large number of species. In processed rattan articles, such as furniture, identification based on morphology is impossible because all required characters have been lost during the processing.
 
 The RattanID molecular identification toolkit enables the identification of rattan palms and furniture using genomic information. This enables the identification even of highly processed rattan canes. It is based on a near-complete genomic reference database of the palm subfamily Calamoideae, which contains all rattan palms. Particular attention has been paid to include economically important rattan species that are likely to be found in furniture.
