@@ -60,23 +60,24 @@ If you don't have your own data yet but want to test the pipeline now, you can d
     name_lower=`echo "$name_sample" | tr '[:upper:]' '[:lower:]'`
     ```
 
-
+### Enable software installed with Anaconda
+`conda activate`
 
 ## Pre-process query reads
-### Enable software installed with Anaconda
-`conda activate`  
-
 ### Adapter and quality trimming
-Removal of adapter sequences and trimming of low quality sequence parts  
+Remove adapter sequences and trim sequence parts with low quality score.  
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 
 ### Remove non-calamoid reads
+Classify reads as calamoid or non-calamoid by comparison to calamoid genomes. Discard non-calamoid reads.  
 `kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name_sample"_kraken.txt --classified-out "$name_sample"#P_decontaminated.fastq "$name_sample"_1P.fastq.gz "$name_sample"_2P.fastq.gz`
 
 ### Merge forward and reverse reads per sample
+Combine the forward and reverse reads of each sample.  
 `bbmerge.sh in1="$name_sample"_1P_decontaminated.fastq in2="$name_sample"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t`
 
-### Normalise reads by downsampling to 500,000 reads
+### Normalise sequence data by downsampling to 500,000 reads
+Sample 500,000 reads from the sequence data. If there are less than 500,000 reads, keep all.  
 `seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq`
 
 ## Query sample against reference
