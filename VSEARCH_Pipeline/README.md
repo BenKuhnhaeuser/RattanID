@@ -19,7 +19,7 @@ Reference data needed to run the pipeline can be found [here](https://doi.org/10
 - `adapters`: Sequencing adapters for adapter removal (for Illumina paired-end sequencing data)
 - `kraken_db_calamoideae`: Kraken database for removal of non-calamoid DNA
 - `vsearch_targetfile.fasta`: Target file for retrieving genes
-- `vsearch_reference_db`: VSEARCH reference database  
+- `vsearch_reference_db`: VSEARCH reference database directory for identification  
 
 Compressed files and directories (ending with `.tar.gz`) need to be uncompressed, e.g. using `tar -xzvf`.
 
