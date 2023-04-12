@@ -15,13 +15,13 @@
 
 # Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
-# Sequencing adapters file
+# Sequencing adapters file for adapter removal
 adapters=./adapters/TruSeq3-PE-2.fa
 
-# Kraken database directory for decontamination
+# Kraken database directory for removal of non-calamoid DNA  
 kraken_db=./db_calamoideae/
 
-# Target file for retrieving targeted genes
+# Target file
 targetfile=./vsearch_targetfile.fasta
 
 # VSEARCH genomic reference database for identification
@@ -111,10 +111,8 @@ cat "$name_sample"/queries/vsearch_*.tsv | cut -f 2 | cut -f 1,2 -d "_" | sort |
 # If resulting file is empty, write minimal output into file
 if [[ ! -s "$name_sample"/queries/tmp.txt ]]; then echo -e "0\tNA" > "$name_sample"/queries/tmp.txt; fi
 
-
 # Calculate percentages, unless file is empty (then output NAs)
 awk -v name_sample=$name_sample 'FNR==NR{sum += $1; next}; sum>0 {print name_sample "\t" $2 "\t" $1 "\t" $1/sum*100}; sum==0 {print  name_sample "\t" "NA" "\t" "0" "\t" "NA"}' "$name_sample"/queries/tmp.txt "$name_sample"/queries/tmp.txt > "$name_sample"_vsearch.txt
-
 
 # Add header row
 sed -i '1i Query\tIdentification\tCount\tPercentage' "$name_sample"_vsearch.txt
