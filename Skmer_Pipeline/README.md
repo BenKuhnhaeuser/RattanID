@@ -17,7 +17,7 @@ For batch processing of multiple samples, we also provide a [slurm script](skmer
 Reference data needed to run the pipeline can be found [here](https://doi.org/10.5281/zenodo.7733000). You need the following data:
 - `adapters`: Sequencing adapters for adapter removal (for Illumina paired-end sequencing data)
 - `kraken_db_calamoideae`: Kraken database for removal of non-calamoid DNA
-- `skmer_reference_db_normalised_5e5reads`: Skmer reference database  
+- `skmer_reference_db_normalised_5e5reads`: Skmer genomic reference database directory for identification  
 
 Compressed files and directories (ending with `.tar.gz`) need to be uncompressed, e.g. using `tar -xzvf`.
 
