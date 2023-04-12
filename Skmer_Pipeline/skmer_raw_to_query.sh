@@ -15,13 +15,13 @@
 
 # Reference data (NEED TO SPECIFY FILE AND DIRECTORY LOCATIONS)
 #----------------
-# Sequencing adapters file
+# Sequencing adapters file for adapter removal
 adapters=./adapters/TruSeq3-PE-2.fa
 
-# Kraken database directory for decontamination
+# Kraken database directory for removal of non-calamoid DNA  
 kraken_db=./db_calamoideae/
 
-# Skmer genomic reference database directory for identification
+# Skmer genomic reference database directory for identification  
 skmer_db=./skmer_reference_db/
 
 
