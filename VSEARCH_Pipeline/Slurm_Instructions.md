@@ -38,7 +38,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 
 - List of sample names  
   * One name per line
-  * **In exactly the same order as sequence names**
+  * **In exactly the same order as the sequence names**
   * No whitespace (" "), no special characters such as "/", "?", "*", ","
   * Underscores `_`, hyphens `-` and full stops `.` are ok.
   * Each name must be unique
@@ -104,7 +104,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 ## Submit Slurm job array
 `sbatch --array=1-3%1 vsearch_raw_to_query.sh`
 - This submits the first three samples that are specified in the name lists `1-3`, one at a time `%1`
-- Adapt as needed. For example, `--array=4-100%5` would submit samples 4 to 100 of the name lists, processing five samples in parallel
+- Adapt as needed. For example, `--array=4-100%5` would submit samples 4 to 100 of the name lists, processing 5 samples in parallel
 
 ## Combine summary files
 `cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
