@@ -6,7 +6,7 @@ For batch processing of multiple samples, follow the instructions [here](Slurm_I
 
 ## Preparations
 ### Computational resources
-Recommended computational resource allocation: 8 cores, 16GB memory.
+Recommended computational resource allocation: 8 cores, 16GB memory.  
 
 ### Install required software
 The script is verified to work with the indicated software versions.
@@ -34,35 +34,35 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - Download `example_data_targetcapture.tar`
 - Uncompress using `tar -xvf example_data_targetcapture.tar`  
 
-### Specify reference data (adapt path as needed)
-- Specify sequencing adapters file  
+### Specify reference data as needed
+- Sequencing adapters file for adapter removal   
   `adapters=./adapters/TruSeq3-PE-2.fa`
-- Kraken database directory for decontamination  
+- Kraken database directory for removal of non-calamoid DNA  
   `kraken_db=./db_calamoideae/`
 - Target file for retrieving targeted genes  
   `targetfile=./vsearch_targetfile.fasta`
 - VSEARCH genomic reference database directory for identification  
   `vsearch_db=./vsearch_reference_db/`
 
-### Specify query data (adapt path as needed)
+### Specify query data as needed
 - Directory containing compressed paired end raw data files (`.fastq.gz`)   
   `data_directory=./data/`
 - File ending of raw data files  
-  `file_ending="_S1_L005_R1_001.fastq.gz"`
-  * Common ending of forward read, excluding sequence name. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`
+  `file_ending="_S1_L005_R1_001.fastq.gz"`  
+  This should be the common ending of all the files containing forward reads, excluding the parts that are specific to each sample. E.g., for the file `BKL001_S1_L005_R2_001.fastq.gz` the sequence name is `BKL001` and the file ending is `_S1_L005_R1_001.fastq.gz`.
 - Sequence name and corresponding sample name
   * Sequence name  
     `name_sequence="BKL001"`
   * Sample name  
-    `name_sample="Rattan_A_Kuhnhaeuser_BKL001"`
-
-    Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_`, hyphens `-` and full stops `.` are ok.
+    `name_sample="Rattan_A"`  
+    Naming conventions: No whitespace ` `, no special characters such as `/`, `?`, `*`, `,`. Underscores `_`, hyphens `-` and full stops `.` are ok. It is possible to provide identical sequence and sample names.
 
 ## Pre-process query reads
 ### Enable software installed with Anaconda
 `conda activate`  
 
 ### Adapter and quality trimming
+Removal of adapter sequences and trimming of low quality sequence parts  
 `trimmomatic PE -threads 4 -phred33 -basein "$data_directory"/"$name_sequence""$file_ending" -baseout "$name_sample".fastq.gz ILLUMINACLIP:"$adapters":2:30:10:1:true LEADING:3 TRAILING:3 MAXINFO:40:0.8 MINLEN:36`
 
 ### Remove non-calamoid reads
@@ -93,7 +93,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
   for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do vsearch --db "$vsearch_db"/"$gene"_gene.fasta --usearch_global "$name_sample"/genes/"$gene".FNA --userfields query+target+id1+id2+ql+tl+alnlen+qcov+tcov+mism+opens+gaps+pctgaps --userout "$name_sample"/queries/vsearch_"$gene".tsv --id 0.5; done
   ```
 
-## Summarise query results
+### Summarise query results in a table
 - Combine results of individual gene searches into a table  
 `cat "$name_sample"/queries/vsearch_*.tsv | cut -f 2 | cut -f 1,2 -d "_" | sort | uniq -c | sort -k1 -nr > "$name_sample"/queries/tmp.txt`  
   * This results in one line for as many different species identifications as there are for the sample 
@@ -115,7 +115,8 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - Retrieve main identification, which is at the top of the sorted table   
   `head -2 "$name_sample"_vsearch.txt > "$name_sample"_summary.txt`
 
-- Conduct check whether minimum data requirements were fulfilled for results to be reliable, add this as a new column `Data_check`  to summary file  
+- Add data check
+Conduct check whether minimum data requirements were fulfilled for results to be reliable, add this as a new column `Data_check`  to summary file  
   `awk 'NR==1{print $0, "Data_check"; next}; $3<2 {Data_check="FAIL"}; $3>=2 && $3<35 {Data_check="WARN"}; $3>=35 {Data_check="PASS"}; {print $0, Data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt`
   * `PASS` if main identification has at least 35 hits
   * `WARN` if main identification has at least 2 but fewer than 35 hits
