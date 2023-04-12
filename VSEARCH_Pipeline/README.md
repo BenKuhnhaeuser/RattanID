@@ -1,10 +1,10 @@
 # VSEARCH Pipeline
 
-Our VSEARCH Pipeline utilises genomic information contained in short read target capture data. It processes all samples to identify as follows:
-- removes low quality and non-Calamoid sequences
-- retrieves genes with high information content for identification
-- conducts a search against the reference database for each retrieved gene
-- generates an identification based on the consensus of the individual identifications of each gene
+Our VSEARCH Pipeline utilises genomic information contained in short read target capture data retrieved using the [Angiosperms353](https://doi.org/10.1093/sysbio/syy086) and [PhyloPalm](https://doi.org/10.3389/fpls.2019.00864) probe kits. It processes all samples to identify as follows:
+- removes low quality and non-Calamoid sequences  using Trimmomatic and Kraken
+- retrieves genes with high information content for identification using HybPiper
+- matches each retrieved gene against the reference database and returns the species with the highest similarity using VSEARCH
+- generates an identification based on the most frequent species identification across all retrieved genes
 - checks if there was enough data for the identification to be reliable. There are three possible outcomes:
   * `PASS`: the identification is likely correct
   * `WARN`: the identification is less certain
