@@ -6,8 +6,8 @@ Rattans are spiny climbing palms – their long, flexible stems are the source o
 
 The RattanID molecular identification toolkit enables the identification of rattan palms and furniture using genomic information. It is based on a near-complete genomic reference database of the palm subfamily Calamoideae, which contains all rattan palms. Particular attention has been paid to include economically important rattan species that are likely to be found in furniture.
 
-We have developed two approaches for the identification of rattans based on the tools [Skmer](https://github.com/shahab-sarmashghi/Skmer) and [VSEARCH](https://github.com/torognes/vsearch):
+We have developed two approaches for the identification of rattans:
 - [Skmer pipeline](Skmer_Pipeline): Identification using genome skimming data
-- [VSEARCH pipeline](VSEARCH_Pipeline): Identification using [Angiosperms353](https://doi.org/10.1093/sysbio/syy086) and [PhyloPalm](https://doi.org/10.3389/fpls.2019.00864) target capture data  
+- [VSEARCH pipeline](VSEARCH_Pipeline): Identification using [Angiosperms353](https://doi.org/10.1093/sysbio/syy086) and [PhyloPalm](https://doi.org/10.3389/fpls.2019.00864) target capture data    
 
 This project is based on a collaboration between the Royal Botanic Gardens Kew and IKEA: https://www.kew.org/science/our-science/projects/sustainable-rattan.
