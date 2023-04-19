@@ -8,6 +8,6 @@ The RattanID molecular identification toolkit enables the identification of ratt
 
 We have developed two approaches for the identification of rattans:
 - [Skmer pipeline](Skmer_Pipeline): Identification using genome skimming data
-- [VSEARCH pipeline](VSEARCH_Pipeline): Identification using [Angiosperms353](https://doi.org/10.1093/sysbio/syy086) and [PhyloPalm](https://doi.org/10.3389/fpls.2019.00864) target capture data    
+- [VSEARCH pipeline](VSEARCH_Pipeline): Identification using target capture data    
 
 This project is based on a collaboration between the Royal Botanic Gardens Kew and IKEA: https://www.kew.org/science/our-science/projects/sustainable-rattan.
