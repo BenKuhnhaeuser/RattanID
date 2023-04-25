@@ -19,7 +19,7 @@ The workflow of rattan identification for both methods involves four steps:
 | 1. Sampling | Labelling, quick drying to avoid mould formation
 | 2. DNA extraction | Isolating genetic information from the sample
 | 3. DNA sequencing | Digitising genetic information to make it accessible for bioinformatic analysis
-| 4. Identification | Providing a species identification of the sample by comparison of its sequenced genetic information to a reference database  
+| 4. Identification | Species identification by comparison to a reference database  
   
 **Steps 1 to 3 (Sampling, DNA extraction and Sequencing)** are covered in the laboratory protocol provided [here](https://doi.org/10.5281/zenodo.7733000). **Step 4 (Identification)** requires downloading the reference datasets deposited [here](https://doi.org/10.5281/zenodo.7733000). The bioinformatic process of identification is covered in detail on this webpage:
 - Skmer pipeline: [Method overview](Skmer_Pipeline)
