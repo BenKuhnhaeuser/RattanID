@@ -29,4 +29,4 @@ The workflow of rattan identification for both methods involves four steps:
   * [Tutorial](VSEARCH_Pipeline/Tutorial.md): Step-by-step instructions for analysis of a single sample
   * [HPC instructions](VSEARCH_Pipeline/Slurm_Instructions.md): Instructions for  processing of multiple samples on a high performance computer (HPC) using our provided [script](VSEARCH_Pipeline/vsearch_raw_to_query.sh).
   
-This project is based on a collaboration between the Royal Botanic Gardens Kew and IKEA: https://www.kew.org/science/our-science/projects/sustainable-rattan.
+This project is based on a [collaboration between the Royal Botanic Gardens Kew and IKEA](https://www.kew.org/science/our-science/projects/sustainable-rattan) to support a more sustainable rattan industry.
