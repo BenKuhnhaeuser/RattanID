@@ -11,7 +11,7 @@ The workflow of rattan identification for both methods involves four steps:
 | Step | Description
 | --- | ---
 | 1. Sampling | Sample collection, labelling and drying
-| 2. DNA extraction | Isolating genetic information from the sample
+| 2. DNA extraction | Isolating genetic material from the sample
 | 3. DNA sequencing | Digitising genetic information to make it accessible for bioinformatic analysis
 | 4. Identification | Species identification by comparison of its genetic information to a reference database  
   
