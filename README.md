@@ -15,7 +15,7 @@ The workflow of rattan identification involves four steps:
 | 3. DNA sequencing | Digitising genetic information to make it accessible for bioinformatic analysis
 | 4. Identification | Species identification by comparison of its genetic information to a reference database  
   
-**Steps 1 to 3 (Sampling, DNA extraction and Sequencing)** are covered in the laboratory protocol provided on [Zenodo](https://doi.org/10.5281/zenodo.7733000). **Step 4 (Identification)** is covered in detail on this webpage and requires downloading the reference datasets deposited on [Zenodo](https://doi.org/10.5281/zenodo.7733000). We have developed two approaches for the identification of rattans:
+**Steps 1 to 3 (Sampling, DNA extraction and Sequencing)** are covered in the laboratory protocol provided on [Zenodo](https://doi.org/10.5281/zenodo.7733000). **Step 4 (Identification)** is covered in detail on this webpage and requires the downloading of reference datasets deposited on [Zenodo](https://doi.org/10.5281/zenodo.7733000). We have developed two approaches for the identification of rattans:
 - **Skmer pipeline: Identification using genome skimming data**  
 Shallow sequencing across the entire genome. Sample-specific genetic profiles are then computed using the composition of short stretches of DNA, so-called k-mers. Identification is based on the comparison of the k-mer profiles of the sample with the reference database. The reference species with the smallest genomic distance is considered the main identification. This procedure is relatively simple but cannot provide a measure of confidence in the identification.
   * [Overview](Skmer_Pipeline): Summary of the bioinformatic pipeline
