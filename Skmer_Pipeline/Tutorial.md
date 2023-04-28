@@ -115,7 +115,9 @@ Check whether minimum data requirements were fulfilled for results to be reliabl
     * The smaller the distance, the more closely related is the query to the reference sample
     * The reference sample with the smallest distance is regarded as the main identification
 - Main identification of query sample, including summary statistics:  
-  `cat "$name_sample"_summary.txt`
+  `cat "$name_sample"_summary.txt`  
+  
+Examplary results based on our example data can be found [here](../example/results_skmer/).
 
 ## Clean up intermediate files
 - Remove trimmed reads: `rm "$name_sample"_{1,2}{U,P}.fastq.gz`
