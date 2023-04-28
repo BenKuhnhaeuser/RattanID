@@ -25,8 +25,8 @@ Shallow sequencing across the entire genome. Sample-specific genetic profiles ar
   * [Tutorial](Skmer_Pipeline/Tutorial.md): Step-by-step instructions for analysis of a single sample
   * [HPC instructions](Skmer_Pipeline/Slurm_Instructions.md): Instructions for processing of multiple samples on a high performance computer (HPC) using our provided [script](Skmer_Pipeline/skmer_raw_to_query.sh).
   
-  Exemplary output (full results of three examples can be found [here](example/results_skmer/)):  
-  * Sorted list of identifications (showing top 3 hits only):  
+  Output files (full results of three examples can be found [here](example/results_skmer/)):  
+  * Sorted list of identifications (showing here the top 3 hits only):  
   
     | Reference species | Genomic distance |  Ranking
     | --- | --- | ---  
@@ -34,7 +34,7 @@ Shallow sequencing across the entire genome. Sample-specific genetic profiles ar
     | Calamus_fissilis	| 0.04043586457919712 | 2 
     | Calamus_eugenei	| 0.0410779197299892 | 3  
     
-  * For the main identification, a data check is performed to assess whether it has sufficient data to be reliable:  
+  * Main identification including an indication whether there is sufficient data for the results to be accurate: 
     | Main identification | Genomic distance | Data check
     | --- | --- | ---  
     | Calamus_applanatus	| 0.040205095178766026 | PASS
@@ -45,9 +45,9 @@ Targeted sequencing of hundreds of genes selected for their genetic informativen
   * [Tutorial](VSEARCH_Pipeline/Tutorial.md): Step-by-step instructions for analysis of a single sample
   * [HPC instructions](VSEARCH_Pipeline/Slurm_Instructions.md): Instructions for  processing of multiple samples on a high performance computer (HPC) using our provided [script](VSEARCH_Pipeline/vsearch_raw_to_query.sh).  
     
-  Exemplary output (Full results of three examples can be found [here](example/results_vsearch/)):  
+  Output files (full results of three examples can be found [here](example/results_vsearch/)):  
   
-  * Sorted list of identifications (showing top 3 hits only):  
+  * Sorted list of identifications (showing here the top 3 hits only):  
   
     | Reference species | Number of genes | Percentage of genes |  Ranking
     | --- | --- | --- | --- 
@@ -55,7 +55,7 @@ Targeted sequencing of hundreds of genes selected for their genetic informativen
     | Calamus_mollispinus	| 47 | 12.6344 | 2 
     | Calamus_applanatus	| 41 | 11.0215 | 3 
     
-  * For the main identification, a data check is performed to assess whether it has sufficient data to be reliable:  
+  * Main identification including an indication whether there is sufficient data for the results to be accurate:  
     | Main identification | Number of genes | Percentage of genes | Data check
     | --- | --- | --- | --- 
     | Calamus_fissilis | 68 | 18.2796 | PASS
