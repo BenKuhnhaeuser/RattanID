@@ -1,0 +1,4 @@
+Query          Identification      Count  Percentage  Data_check
+Rattan_A       Calamus_fissilis    23     14.6497     WARN
+Rattan_B       Calamus_applanatus  2      25          FAIL
+Rattan_C       Calamus_fissilis    68     18.2796     PASS
