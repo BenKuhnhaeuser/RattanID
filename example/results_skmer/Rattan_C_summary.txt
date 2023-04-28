@@ -1,0 +1,2 @@
+sample_id sequence_id reads identification min_distance data_check
+Rattan_C BKL003 500000 Calamus_applanatus_Henderson_3220_RBL159 0.040205095178766026 PASS

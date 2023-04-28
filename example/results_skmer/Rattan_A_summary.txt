@@ -1,0 +1,2 @@
+sample_id sequence_id reads identification min_distance data_check
+Rattan_A BKL001 299575 Calamus_fissilis_Henderson_3289_BKL064 0.03678710932245566 WARN

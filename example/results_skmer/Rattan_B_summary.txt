@@ -1,0 +1,2 @@
+sample_id sequence_id reads identification min_distance data_check
+Rattan_B BKL002 180449 Calamus_maturbongsii_Maturbongs_32_BKL180 0.0977673944996158 FAIL
