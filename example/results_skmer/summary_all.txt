@@ -1,4 +1,4 @@
 sample_id      sequence_id     reads   identification                             min_distance          data_check
-Rattan_C       BKL003          500000  Calamus_applanatus_Henderson_3220_RBL159   0.040205095178766026  PASS
 Rattan_A       BKL001          299575  Calamus_fissilis_Henderson_3289_BKL064     0.03678710932245566   WARN
 Rattan_B       BKL002          180449  Calamus_maturbongsii_Maturbongs_32_BKL180  0.0977673944996158    FAIL
+Rattan_C       BKL003          500000  Calamus_applanatus_Henderson_3220_RBL159   0.040205095178766026  PASS
