@@ -34,7 +34,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
 - List of sequence names  
   * One name per line
   *  Sequence name excluding common file ending. E.g., file "BKL001_S1_L005_R1_001.fastq.gz" would have sequence name "BKL001"
-  *   Example sequence name list: [namelist_sequences.txt](../example/namelist_sequences.txt)  
+  *   Example sequence name list: [namelist_sequences.txt](../example/namelists/namelist_sequences.txt)  
 
 - List of sample names  
   * One name per line
@@ -42,7 +42,7 @@ If you don't have your own data yet but want to test the pipeline now, you can d
   * No whitespace (" "), no special characters such as "/", "?", "*", ","
   * Underscores `_`, hyphens `-` and full stops `.` are ok.
   * Each name must be unique
-  * Example sample name list: [namelist_samples.txt](../example/namelist_samples.txt)  
+  * Example sample name list: [namelist_samples.txt](../example/namelists/namelist_samples.txt)  
 
 ### Create directory for log files
 `mkdir logs`
