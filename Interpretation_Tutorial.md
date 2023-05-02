@@ -14,11 +14,12 @@ This file includes a column labelled `Data_check` that indicates whether the top
   
   **You should treat any identifications that do not pass these data checks with caution.**
  
-- a detailed list of all matches of the sample against the reference dataset, named `[samplename]_vsearch.txt` (VSEARCH pipeline) / `[samplename]_distances.txt` (Skmer pipeline). **We recommend to always check these detailed outputs for a comprehensive understanding of the results.** You may encounter three different main scenarios that we discuss below (showing only the top up to 10 identifications):
-
-1. Clear identification, good data
-2. Ambiguous identification, good data
-3. Ambiguous identification, insufficient data
+- a detailed list of all matches of the sample against the reference dataset, named `[samplename]_vsearch.txt` (VSEARCH pipeline) / `[samplename]_distances.txt` (Skmer pipeline). **We recommend to always check these detailed outputs for a comprehensive understanding of the results.** You may encounter three different main scenarios that we discuss below (showing only the top 5 identifications):  
+  ```
+  1. Clear identification, good data
+  2. Ambiguous identification, good data
+  3. Ambiguous identification, insufficient data
+  ```
 
 ## 1. Clear identification, good data
 
