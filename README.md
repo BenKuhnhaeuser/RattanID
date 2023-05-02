@@ -25,40 +25,13 @@ Shallow sequencing across the entire genome. Sample-specific genetic profiles ar
   * [Tutorial](Skmer_Pipeline/Tutorial.md): Step-by-step instructions for analysis of a single sample
   * [HPC instructions](Skmer_Pipeline/Slurm_Instructions.md): Instructions for processing of multiple samples on a high performance computer (HPC) using our provided [script](Skmer_Pipeline/skmer_raw_to_query.sh).
   
-  Output files (full results of three examples can be found [here](example/results_skmer/)):  
-  * Sorted list of identifications (showing here the top 3 hits only):  
-  
-    | Reference species | Genomic distance |  Ranking
-    | --- | --- | ---  
-    | Calamus_applanatus	| 0.040205095178766026 | 1 (Main identification)
-    | Calamus_fissilis	| 0.04043586457919712 | 2 
-    | Calamus_eugenei	| 0.0410779197299892 | 3  
-    
-  * Main identification including an indication whether there is sufficient data for the results to be accurate: 
-    | Main identification | Genomic distance | Data check
-    | --- | --- | ---  
-    | Calamus_applanatus	| 0.040205095178766026 | PASS
-
 - **VSEARCH pipeline: Identification using target capture data**  
 Targeted sequencing of hundreds of genes selected for their genetic informativeness. Retrieved genes are then compared one by one to the corresponding genes of the species in the reference database. The reference species identified by most genes is considered the main identification. This procedure is relatively complex but identifications are more accurate compared to the Skmer pipeline. The results are relatively easy to interpret, giving a good sense of the certainty of identification and plausible alternative identifications.  
   * [Overview](VSEARCH_Pipeline): Summary of the bioinformatic pipeline
   * [Tutorial](VSEARCH_Pipeline/Tutorial.md): Step-by-step instructions for analysis of a single sample
   * [HPC instructions](VSEARCH_Pipeline/Slurm_Instructions.md): Instructions for  processing of multiple samples on a high performance computer (HPC) using our provided [script](VSEARCH_Pipeline/vsearch_raw_to_query.sh).  
-    
-  Output files (full results of three examples can be found [here](example/results_vsearch/)):  
-  
-  * Sorted list of identifications (showing here the top 3 hits only):  
-  
-    | Reference species | Number of genes | Percentage of genes |  Ranking
-    | --- | --- | --- | --- 
-    | Calamus_fissilis	| 68 | 18.2796 | 1 (Main identification)
-    | Calamus_mollispinus	| 47 | 12.6344 | 2 
-    | Calamus_applanatus	| 41 | 11.0215 | 3 
-    
-  * Main identification including an indication whether there is sufficient data for the results to be accurate:  
-    | Main identification | Number of genes | Percentage of genes | Data check
-    | --- | --- | --- | --- 
-    | Calamus_fissilis | 68 | 18.2796 | PASS
+
+For interpretation of the results returned by both pipelines, please consult our [Interpretation tutorial](Interpretation_Tutorial.md).
   
 ## How to cite us
-Kuhnhäuser, Baker & Bellot. 2023. **RattanID – a molecular identification toolkit for rattan palms.** Version 1.0. https://github.com/BenKuhnhaeuser/RattanID/. 
+B.G. Kuhnhäuser, W. Baker & S. Bellot. 2023. **RattanID – a molecular identification toolkit for rattan palms.** Version 1.0. https://github.com/BenKuhnhaeuser/RattanID/. 
