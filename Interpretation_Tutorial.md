@@ -81,15 +81,38 @@ Calamus_ocreatus_Nguyen_2006_JSL434 | 0.0449
 At first sight, the outputs of the VSEARCH and Skmer pipelines seem to disagreee as they return *Calamus applanatus* and *Calamus fissilis*, respectively, as main identification. However, closer analyses of the outputs of both methods reveals that *Calamus applanatus*, *Calamus fissilis* and *Calamus eugenei* all need to be considered as a joint identification. This is a highly plausible outcome as all three species are closely related members of the *Calamus applanatus* species group. The ambiguous identification thus results from the biological complexity of the species involved. 
 
 
+## 3. Ambiguous identification, insufficient data
+
+### VSEARCH
+The top hit is supported by fewer than 35 genes and thus does not pass the data check. The top hits are supported by very similar numbers of genes. 
+In the example here, only four genes could be retrieved for the analysed samples. *Calamus crassifolius* was identified by two genes (50 %), and *Korthalsia zippelii* and *Calamus peregrinus* by one gene (25 %), respectively. Because there is so little data, these results should be treated with extreme caution. No reliable identification can be made.
+
+Reference species | Number of genes | Percentage of genes
+--- | --- | ---
+Calamus_crassifolius | 2 | 50
+Korthalsia_zippelii | 1 | 25
+Calamus_peregrinus | 1 | 25
 
 
+### Skmer
+The top hit has a genomic distance higher than 0.05 and thus does not pass the data check.  
+In the example here, the reference species with the smallest genomic distance to the sample is *Calamus burkillianus*. However, the distance is with 0.0989 much higher than the cut-off value of 0.05. For other reference species, it is even higher. These results should therefore be treated with extreme caution. No reliable identification can be made.
 
+Reference species | Genomic distance
+--- | ---
+Calamus_burkillianus_Dransfield_5066_JSL560 | 0.0989
+Calamus_spiculifer_Zieck_NGF_36558_JSL546 | 0.1025
+Calamus_oblongus_subsp_elongatus_Dransfield_2064_JSL472 | 0.1026
+Calamus_metzianus_Thwaites_3914_JSL440 | 0.1034
+Calamus_maturbongsii_Maturbongs_32_BKL180 | 0.1069
 
+### Combined evidence of VSEARCH and Skmer analyses
+The VSEARCH and Skmer analyses differ in the identifications provided. These differences do not reflect biological complexity but are caused solely by data deficiency. No reliable identification can be made.
 
+## Useful resources for checking species identifications
+In case there is any uncertainty about species identifications, we recommend consulting the excellent revision of the most important rattan genus *Calamus* by Andrew Henderson (2020): https://www.biotaxa.org/Phytotaxa/article/view/phytotaxa.445.1.1. This resource describes all species of *Calamus* in detail, including maps of geographical distribution that can be useful if the provenance of samples is known.  
 
-
-
-
+The Plants of the World Online webpage can also be a useful source of information: https://powo.science.kew.org/
 
 
 
