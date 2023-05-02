@@ -14,7 +14,7 @@ This file includes a column labelled `Data_check` that indicates whether the top
   
   **You should treat any identifications that do not pass these data checks with caution.**
  
-- a detailed list of all matches of the sample against the reference dataset, named `[samplename]_vsearch.txt` (VSEARCH pipeline) / `[samplename]_distances.txt` (Skmer pipeline). **We recommend to always check these detailed outputs for a comprehensive understanding of the results.** You may encounter three different main scenarios that we discuss below (showing only the top 5 identifications):
+- a detailed list of all matches of the sample against the reference dataset, named `[samplename]_vsearch.txt` (VSEARCH pipeline) / `[samplename]_distances.txt` (Skmer pipeline). **We recommend to always check these detailed outputs for a comprehensive understanding of the results.** You may encounter three different main scenarios that we discuss below (showing only the top up to 10 identifications):
 
 1. Clear identification, good data
 2. Ambiguous identification, good data
@@ -36,7 +36,7 @@ Calamus_rhomboideus | 7 | 1.86
 
 
 ### Skmer
-The top hit has a genomic distance smaller than 0.05 and thus passes the data check.  
+The top hit has a genomic distance smaller than 0.05 and thus passes the data check. Only few reference species have a genomic distances smaller than the cut-off.     
 In the example here, *Calamus trachycoleus* has the smallest genomic distance and is thus considered the main identification. *Calamus caesius* also has a genomic distance smaller than 0.05 and needs to be considered as well. Other reference species have genomic distances larger than 0.05 and do not need to be considered.
 
 Reference species | Genomic distance
@@ -46,6 +46,67 @@ Calamus_caesius_Baker_547_JSL044 | 0.0426
 Calamus_plicatus_Kuhnhäuser_74_JSL076 | 0.0531
 Calamus_didymocarpus_Henderson_4283_JSL037 | 0.0535
 Calamus_rhomboideus_Baker_565_RBL084 | 0.0535
+
+### Combined evidence of VSEARCH and Skmer analyses
+Both analyses identify the sample as *Calamus trachycoleus*.
+
+
+## 2. Ambiguous identification, good data
+
+### VSEARCH
+The top hit is supported by well over 35 genes and thus passes the data check. The top hits are supported by very similar numbers of genes.  
+In the example here, *Calamus applanatus* is identified by 55 genes (15 %), but *Calamus fissilis* and *Calamus eugenei* are close runner-ups with 51 genes (14 %) and 41 gene (11 %), respectively. All three species therefore are plausible identifications. Other reference species are matched by much fewer genes and can thus be disregarded.
+
+Reference species | Number of genes | Percentage of genes
+--- | --- | ---
+Calamus_applanatus | 55 | 15.71
+Calamus_fissilis | 51 | 14.57
+Calamus_eugenei | 41 | 11.71
+Calamus_mollispinus | 18 | 5.14
+Calamus_nuichuaensis | 15 | 4.29
+
+### Skmer
+The top hit has a genomic distance smaller than 0.05 and thus passes the data check. Many different reference species have a genomic distance smaller than the cut-off.  
+In the example here, *Calamus fissilis* has the smallest genomic distance of 0.0409 but *Calamus eugenei* and *Calamus applanatus* have highly similar genomic distances of 0.0416 and 0.0418, respectively. All three species therefore are plausible identifications. Other reference species have considerably higher genomic distances but are still well below the cut-off value of 0.05. This is plausible as all of these species belong to the *Calamus applanatus* species complex. 
+
+Reference species | Genomic distance
+--- | ---
+Calamus_fissilis_Henderson_3266_JSL024 | 0.0409
+Calamus_eugenei_Henderson_3693_RBL233 | 0.0416
+Calamus_applanatus_Henderson_3220_RBL159 | 0.0418
+Calamus_mollispinus_Henderson_3667_JSL022 | 0.0442
+Calamus_ocreatus_Nguyen_2006_JSL434 | 0.0449
+
+### Combined evidence of VSEARCH and Skmer analyses
+At first sight, the outputs of the VSEARCH and Skmer pipelines seem to disagreee as they return *Calamus applanatus* and *Calamus fissilis*, respectively, as main identification. However, closer analyses of the outputs of both methods reveals that *Calamus applanatus*, *Calamus fissilis* and *Calamus eugenei* all need to be considered as a joint identification. This is a highly plausible outcome as all three species are closely related members of the *Calamus applanatus* species group. The ambiguous identification thus results from the biological complexity of the species involved. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
