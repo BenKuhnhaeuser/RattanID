@@ -117,7 +117,7 @@ Check whether minimum data requirements were fulfilled for results to be reliabl
 - Main identification of query sample, including summary statistics:  
   `cat "$name_sample"_summary.txt`  
   
-Examplary results based on our example data can be found [here](../example/results_skmer/).
+Examplary results based on our example data can be found [here](../example/results_skmer/). For interpretation of these results, please consult our [Interpretation tutorial](Interpretation_Tutorial.md).
 
 ## Clean up intermediate files
 - Remove trimmed reads: `rm "$name_sample"_{1,2}{U,P}.fastq.gz`
