@@ -21,7 +21,7 @@ Reference data needed to run the pipeline can be found [here](https://doi.org/10
 
 Compressed files and directories (ending with `.tar.gz`) need to be uncompressed, e.g. using `tar -xzvf`.
 
-### Citations
+### Software
 This pipeline incorporates several software tools. Please credit them by citing the following papers:
 - Sarmashghi, S., Bohmann, K., P. Gilbert, M.T., Bafna, V., Mirarab, S., 2019. Skmer: assembly-free and alignment-free sample identification using genome skims. Genome Biol. 20, 20. https://doi.org/10.1186/s13059-019-1632-4
 - Bolger, A.M., Lohse, M., Usadel, B., 2014. Trimmomatic: a flexible trimmer for Illumina sequence data. Bioinformatics 30, 2114-2120. https://doi.org/10.1093/bioinformatics/btu170
