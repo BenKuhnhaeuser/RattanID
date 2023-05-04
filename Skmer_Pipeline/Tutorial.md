@@ -80,12 +80,18 @@ Combine the forward and reverse reads of each sample.
 Sample 500,000 reads from the sequence data. If there are less than 500,000 reads, keep all.  
 `seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq`
 
+##### If no `"$name_sample".fastq` file could be generated, create an empty file with that name
+`if [[ ! -f "$name_sample".fastq ]]; then touch "$name_sample".fastq; fi`
+
 ## Query sample against reference
 ### Calculate genetic distances between query and reference samples
 `skmer query "$name_sample".fastq "$skmer_db" -p 4 -o dist`
 
 ### Rename output from default lowercase output to original file name
 `mv dist-"$name_lower".txt "$name_sample"_distances.txt`
+
+##### If no `distances.txt` file could be generated, create a file with NAs only.
+`if [[ ! -f "$name_sample"_distances.txt ]]; then echo -e "\t$name_sample\nNA\tNA" > "$name_sample"_distances.txt; fi`
 
 ### Summarise results in a table
 #### Create file with table header to store results
@@ -117,7 +123,7 @@ Check whether minimum data requirements were fulfilled for results to be reliabl
 - Main identification of query sample, including summary statistics:  
   `cat "$name_sample"_summary.txt`  
   
-Examplary results based on our example data can be found [here](../example/results_skmer/). For interpretation of these results, please consult our [Interpretation tutorial](../Interpretation_Tutorial.md).
+Exemplary results based on our example data can be found [here](../example/results_skmer/). For interpretation of these results, please consult our [Interpretation tutorial](../Interpretation_Tutorial.md).
 
 ## Clean up intermediate files
 - Remove trimmed reads: `rm "$name_sample"_{1,2}{U,P}.fastq.gz`
@@ -125,6 +131,7 @@ Examplary results based on our example data can be found [here](../example/resul
 - Remove merged reads: `rm "$name_sample"_merged.fastq`
 - Remove normalised reads: `rm "$name_sample".fastq`
 - Remove kraken report: `rm "$name_sample"_kraken.txt`
+- Remove sample directory: `rm -r "$name_sample"/`
 
 ## Combine results of multiple identifications
 `cat *_summary.txt | awk '!seen[$0]++' | column -t > summary_all.txt`
