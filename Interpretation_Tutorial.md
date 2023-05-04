@@ -79,7 +79,7 @@ Calamus_mollispinus_Henderson_3667_JSL022 | 0.0442
 Calamus_ocreatus_Nguyen_2006_JSL434 | 0.0449
 
 ### Combined evidence of VSEARCH and Skmer analyses
-At first sight, the outputs of the VSEARCH and Skmer pipelines seem to disagreee as they return *Calamus applanatus* and *Calamus fissilis*, respectively, as main identification. However, closer analyses of the outputs of both methods reveals that *Calamus applanatus*, *Calamus fissilis* and *Calamus eugenei* all need to be considered as a joint identification. This is a highly plausible outcome as all three species are closely related members of the *Calamus applanatus* species group. The ambiguous identification thus results from the biological complexity of the species involved. 
+At first sight, the outputs of the VSEARCH and Skmer pipelines seem to disagree as they return *Calamus applanatus* and *Calamus fissilis*, respectively, as main identification. However, closer analyses of the outputs of both methods reveals that *Calamus applanatus*, *Calamus fissilis* and *Calamus eugenei* all need to be considered as a joint identification. This is a highly plausible outcome as all three species are closely related members of the *Calamus applanatus* species group. The ambiguous identification thus results from the biological complexity of the species involved. 
 
 
 ## 3. Ambiguous identification, insufficient data
