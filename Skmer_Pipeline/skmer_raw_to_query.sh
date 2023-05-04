@@ -141,5 +141,5 @@ rm "$name_sample".fastq
 # Remove kraken report
 rm "$name_sample"_kraken.txt
 
-# Remove sample directories
+# Remove sample directory
 rm -r "$name_sample"/
