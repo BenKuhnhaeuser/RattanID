@@ -78,11 +78,16 @@ kraken2 --db "$kraken_db" --gzip-compressed --threads 4 --paired --report "$name
 #-------
 bbmerge.sh in1="$name_sample"_1P_decontaminated.fastq in2="$name_sample"_2P_decontaminated.fastq out="$name_sample"_merged.fastq mix=t
 
+
 # Normalise
 #-----------
 # Normalise query by downsampling to 500,000 reads (same as reference)
 seqtk sample -2 -s100 "$name_sample"_merged.fastq 5e5 > "$name_sample".fastq
 
+
+# Create empty file if needed
+#-----------------------------
+if [[ ! -f "$name_sample".fastq ]]; then touch "$name_sample".fastq; fi
 
 #----------------
 Identification
@@ -97,6 +102,11 @@ skmer query "$name_sample".fastq "$skmer_db" -p 4 -o dist
 # Rename
 #--------
 mv dist-"$name_lower".txt "$name_sample"_distances.txt
+
+
+# Create empty file if needed
+#-----------------------------
+if [[ ! -f "$name_sample"_distances.txt ]]; then echo -e "\t$name_sample\nNA\tNA" > "$name_sample"_distances.txt; fi
 
 
 # Summarise
@@ -130,3 +140,6 @@ rm "$name_sample".fastq
 
 # Remove kraken report
 rm "$name_sample"_kraken.txt
+
+# Remove sample directories
+rm -r "$name_sample"/
