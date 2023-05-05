@@ -29,11 +29,11 @@ In the example here, *Calamus trachycoleus* is identified by 194 genes (51 % of 
 
 Reference species | Number of genes | Percentage of genes
 --- | --- | ---
-Calamus_trachycoleus | 194 | 51.46
-Calamus_caesius | 47 | 12.47
-Calamus_optimus | 35 | 9.28
-Calamus_manan | 10 | 2.65
-Calamus_rhomboideus | 7 | 1.86
+Calamus trachycoleus | 194 | 51.46
+Calamus caesius | 47 | 12.47
+Calamus optimus | 35 | 9.28
+Calamus manan | 10 | 2.65
+Calamus rhomboideus | 7 | 1.86
 
 
 ### Skmer
@@ -42,11 +42,11 @@ In the example here, *Calamus trachycoleus* has the smallest genomic distance an
 
 Reference species | Genomic distance
 --- | ---
-Calamus_trachycoleus_Baker_560_BKL020 | 0.0387
-Calamus_caesius_Baker_547_JSL044 | 0.0426
-Calamus_plicatus_Kuhnhäuser_74_JSL076 | 0.0531
-Calamus_didymocarpus_Henderson_4283_JSL037 | 0.0535
-Calamus_rhomboideus_Baker_565_RBL084 | 0.0535
+Calamus trachycoleus | 0.0387
+Calamus caesius | 0.0426
+Calamus plicatus | 0.0531
+Calamus didymocarpus | 0.0535
+Calamus rhomboideus | 0.0535
 
 ### Combined evidence of VSEARCH and Skmer analyses
 Both analyses identify the sample as *Calamus trachycoleus*.
@@ -60,23 +60,23 @@ In the example here, *Calamus applanatus* is identified by 55 genes (15 %), but 
 
 Reference species | Number of genes | Percentage of genes
 --- | --- | ---
-Calamus_applanatus | 55 | 15.71
-Calamus_fissilis | 51 | 14.57
-Calamus_eugenei | 41 | 11.71
-Calamus_mollispinus | 18 | 5.14
-Calamus_nuichuaensis | 15 | 4.29
+Calamus applanatus | 55 | 15.71
+Calamus fissilis | 51 | 14.57
+Calamus eugenei | 41 | 11.71
+Calamus mollispinus | 18 | 5.14
+Calamus nuichuaensis | 15 | 4.29
 
 ### Skmer
 The top hit has a genomic distance smaller than 0.05 and thus passes the data check. Many different reference species have a genomic distance smaller than the cut-off.  
-In the example here, *Calamus fissilis* has the smallest genomic distance of 0.0409 but *Calamus eugenei* and *Calamus applanatus* have highly similar genomic distances of 0.0416 and 0.0418, respectively. All three species therefore are plausible identifications. Other reference species have considerably higher genomic distances but are still well below the cut-off value of 0.05. This is plausible as all of these species belong to the *Calamus applanatus* species complex. 
+In the example here, *Calamus fissilis* has the smallest genomic distance of 0.0409 but *Calamus eugenei* and *Calamus applanatus* have highly similar genomic distances of 0.0416 and 0.0418, respectively. All three species therefore are plausible identifications. Other reference species have considerably higher genomic distances compared to the differences between the first three species but are still well below the cut-off value of 0.05. This is plausible as all of these species belong to the *Calamus applanatus* species complex. 
 
 Reference species | Genomic distance
 --- | ---
-Calamus_fissilis_Henderson_3266_JSL024 | 0.0409
-Calamus_eugenei_Henderson_3693_RBL233 | 0.0416
-Calamus_applanatus_Henderson_3220_RBL159 | 0.0418
-Calamus_mollispinus_Henderson_3667_JSL022 | 0.0442
-Calamus_ocreatus_Nguyen_2006_JSL434 | 0.0449
+Calamus fissilis | 0.0409
+Calamus eugenei | 0.0416
+Calamus applanatus | 0.0418
+Calamus mollispinus | 0.0442
+Calamus ocreatus | 0.0449
 
 ### Combined evidence of VSEARCH and Skmer analyses
 At first sight, the outputs of the VSEARCH and Skmer pipelines seem to disagree as they return *Calamus applanatus* and *Calamus fissilis*, respectively, as main identification. However, closer analyses of the outputs of both methods reveals that *Calamus applanatus*, *Calamus fissilis* and *Calamus eugenei* all need to be considered as a joint identification. This is a highly plausible outcome as all three species are closely related members of the *Calamus applanatus* species group. The ambiguous identification thus results from the biological complexity of the species involved. 
@@ -90,9 +90,9 @@ In the example here, only four genes could be retrieved for the analysed samples
 
 Reference species | Number of genes | Percentage of genes
 --- | --- | ---
-Calamus_crassifolius | 2 | 50
-Korthalsia_zippelii | 1 | 25
-Calamus_peregrinus | 1 | 25
+Calamus crassifolius | 2 | 50
+Korthalsia zippelii | 1 | 25
+Calamus peregrinus | 1 | 25
 
 
 ### Skmer
@@ -101,19 +101,19 @@ In the example here, the reference species with the smallest genomic distance to
 
 Reference species | Genomic distance
 --- | ---
-Calamus_burkillianus_Dransfield_5066_JSL560 | 0.0989
-Calamus_spiculifer_Zieck_NGF_36558_JSL546 | 0.1025
-Calamus_oblongus_subsp_elongatus_Dransfield_2064_JSL472 | 0.1026
-Calamus_metzianus_Thwaites_3914_JSL440 | 0.1034
-Calamus_maturbongsii_Maturbongs_32_BKL180 | 0.1069
+Calamus burkillianus | 0.0989
+Calamus spiculifer | 0.1025
+Calamus oblongus | 0.1026
+Calamus metzianus | 0.1034
+Calamus maturbongsii | 0.1069
 
 ### Combined evidence of VSEARCH and Skmer analyses
 The VSEARCH and Skmer analyses differ in the identifications provided. These differences do not reflect biological complexity but are caused solely by data deficiency. No reliable identification can be made.
 
-## Useful resources for checking species identifications
+## Useful resources for validating species identifications
 In case there is any remaining uncertainty about species identifications, we recommend consulting the excellent revision of the most important rattan genus *Calamus* by Andrew Henderson (2020): https://www.biotaxa.org/Phytotaxa/article/view/phytotaxa.445.1.1. This resource describes all species of *Calamus* in detail, including maps of geographical distribution that can be useful if the provenance of samples is known.  
 
-The Plants of the World Online webpage can also be a useful source of information: https://powo.science.kew.org/
+The Plants of the World Online webpage can also be a useful source of information: https://powo.science.kew.org/.
 
 
 
