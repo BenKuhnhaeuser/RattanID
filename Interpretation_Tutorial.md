@@ -68,7 +68,7 @@ Calamus nuichuaensis | 15 | 4.29
 
 ### Skmer
 The top hit has a genomic distance smaller than 0.05 and thus passes the data check. Many different reference species have a genomic distance smaller than the cut-off.  
-In the example here, *Calamus fissilis* has the smallest genomic distance of 0.0409 but *Calamus eugenei* and *Calamus applanatus* have highly similar genomic distances of 0.0416 and 0.0418, respectively. All three species therefore are plausible identifications. Other reference species have considerably higher genomic distances compared to the differences between the first three species but are still well below the cut-off value of 0.05. This is plausible as all of these species belong to the *Calamus applanatus* species complex. 
+In the example here, *Calamus fissilis* has the smallest genomic distance of 0.0409 but *Calamus eugenei* and *Calamus applanatus* have highly similar genomic distances of 0.0416 and 0.0418, respectively. All three species therefore are plausible identifications. Other reference species have considerably higher genomic distances compared to the differences between the first three species (distances are <0.001 between Calamus fissilis, eugenei and applanatus, but then there is a gap of > 0.002 to the other species) but are still well below the cut-off value of 0.05. This is plausible as all of these species belong to the *Calamus applanatus* species complex. 
 
 Reference species | Genomic distance
 --- | ---
