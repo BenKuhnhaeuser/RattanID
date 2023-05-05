@@ -111,7 +111,7 @@ Calamus maturbongsii | 0.1069
 The VSEARCH and Skmer analyses differ in the identifications provided. These differences do not reflect biological complexity but are caused solely by data deficiency. No reliable identification can be made.
 
 ## Useful resources for validating species identifications
-In case there is any remaining uncertainty about species identifications and species complexes, we recommend consulting the excellent revision of the most important rattan genus *Calamus* by Andrew Henderson (2020): https://www.biotaxa.org/Phytotaxa/article/view/phytotaxa.445.1.1. This resource describes all species of *Calamus* in detail, including maps of geographical distribution that can be useful if the provenance of samples is known.  
+In case there is any remaining uncertainty about species identifications, we recommend consulting the excellent revision of the most important rattan genus *Calamus* by Andrew Henderson (2020): https://www.biotaxa.org/Phytotaxa/article/view/phytotaxa.445.1.1. This resource describes all species of *Calamus* in detail, including useful information on species complexes and maps of geographical distribution that can be useful if the provenance of samples is known.  
 
 The Plants of the World Online webpage can also be a useful source of information: https://powo.science.kew.org/.
 
