@@ -117,7 +117,7 @@ Assemble and retrieve genes from the raw data using the target file. Save them t
 - Retrieve main identification, which is at the top of the sorted table   
   `head -2 "$name_sample"_vsearch.txt > "$name_sample"_summary.txt`
 
-- Add data check
+- Add data check  
 Conduct check whether minimum data requirements were fulfilled for results to be reliable, add this as a new column `Data_check`  to summary file  
   `awk 'NR==1{print $0, "Data_check"; next}; $3<2 {Data_check="FAIL"}; $3>=2 && $3<35 {Data_check="WARN"}; $3>=35 {Data_check="PASS"}; {print $0, Data_check}' "$name_sample"_summary.txt  | awk '{print $1,$2,$3,$4,$5,$6}' > "$name_sample"_summary_tmp.txt`
   * `PASS` if main identification has at least 35 hits
