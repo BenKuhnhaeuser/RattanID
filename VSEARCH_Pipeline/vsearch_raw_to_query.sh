@@ -60,7 +60,7 @@ name_sample=$(awk -v lineid=$SLURM_ARRAY_TASK_ID 'NR==lineid{print;exit}' $names
 
 
 #----------------
-Pre-processing
+# Pre-processing
 #----------------
 
 # Trim
@@ -90,7 +90,7 @@ for gene in `cut -f 1 "$name_sample"/genes_with_seqs.txt`; do samtools faidx "$n
 
 
 #----------------
-Identification
+# Identification
 #----------------
 
 # Query
